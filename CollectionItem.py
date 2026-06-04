@@ -16,7 +16,7 @@ class CollectionItem:
         self.access_considerations = access_considerations
         self.sensitivity_level = sensitivity_level
         self.access_reviews = []
-
+        self.access_requests = []    
 
     # Get item details
     def get_item_details(self):
@@ -82,4 +82,19 @@ class CollectionItem:
 
         for review in self.access_reviews:
             print(review)
+
+    # link request to item
+    def add_access_request(self, request):
+        self.access_requests.append(request)
+        print("Access request added to item.")
+
+    # view all access requests
+    def view_access_requests(self):
+        print(f"\nAccess Requests for Item ID: {self.item_id}")
+        print("------------------------")
+
+        for request in self.access_requests:
+            print(request)
+
+
 
