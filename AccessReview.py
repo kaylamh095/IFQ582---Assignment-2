@@ -2,7 +2,7 @@ from datetime import datetime
 
 class AccessReview:
     # Constructor
-    def __init__(self, review_id, review_notes, access_outcome):
+    def __init__(self, review_id, review_notes, access_outcome, item):
         self.review_id = review_id
         self.review_notes = review_notes
         self.access_outcome = access_outcome
