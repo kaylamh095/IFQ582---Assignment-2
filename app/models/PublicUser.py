@@ -1,4 +1,4 @@
-from AccessRequest import AccessRequest
+from app.models.AccessRequest import AccessRequest
 
 class PublicUser:
     # Constructor
