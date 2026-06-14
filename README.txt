@@ -20,10 +20,11 @@ You can also activate the environment with this command:
 
 Now you can install the preliminary packages
    pip3 install -r requirements.txt
-These packages came from https://canvas.qutonline.edu.au/courses/2246/pages/5-dot-7-activity-2-creating-a-hello-world-flask-application?module_item_id=144580).
+These packages came from https://canvas.qutonline.edu.au/courses/2246/pages/5-dot-7-activity-2-creating-a-hello-world-flask-application?module_item_id=144580.
 They have been saved to requirements.txt so they can be installed with that command.
 
 ## Running it
-In VSCode's command prompt, in the project's root folder, the the environment activated,
+
+In VSCode's command prompt, in the project's root folder, with the environment activated,
 run this:
    python3 run.py

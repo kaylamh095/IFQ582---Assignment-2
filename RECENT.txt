@@ -1,0 +1,7 @@
+# Recent Changes
+
+Expanded and removed Kate Test.zip
+It became TEST folder. 
+Renamed TEST to app.
+Everything still works with python3 run.py
+
