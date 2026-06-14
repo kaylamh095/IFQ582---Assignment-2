@@ -1,0 +1,125 @@
+
+<!-- templates/item.html -->
+{% extends 'base.html' %}
+
+{% block title %}Item Details{% endblock %}
+
+{% block content %}
+</header>
+<main class="container px-5 my-5">
+  <h1 class="mb-4">
+    Collection Item Details
+  </h1>
+
+  <section class="row">
+    <div class="col-md-6">
+      <img src="{{url_for('static', filename='Images/ItemPhotograph.jpg')}}"
+      class="img-fluid"
+      alt="Woman weaving a basket">
+    </div>
+
+    <div class="col-md-6">
+      <h2>
+        Woman weaving a basket at the Laura Aboriginal Dance Festival 2009
+      </h2>
+
+      <p>
+        Digital photographs of the Laura Aboriginal Dance Festival from June 19-21 2009.  
+      </p>
+      <span class="badge badge-success">
+        Approved for Public Access
+      </span>
+    </div>
+  </section>
+
+  <section class="my-5">
+    <h2>
+        Item Information
+      </h2>
+      <table class="table table-bordered">
+    <tr>
+      <th>Item Number</th>
+      <td>LOIKH-001</td>
+    </tr>
+        <tr>
+      <th>Type</th>
+      <td>Photograph</td>
+    </tr>
+
+    <tr>
+      <th>Category</th>
+      <td>Photography</td>
+    </tr>
+
+        <tr>
+      <th>Creator</th>
+      <td>Scragg, Sarah</td>
+    </tr>
+
+     <tr>
+      <th>Creation Date</th>
+      <td>2009</td>
+    </tr>
+
+  <tr>
+      <th>Date Added</th>
+      <td>1st May 2026</td>
+    </tr>
+
+          <tr>
+      <th>Conditions of Use</th>
+      <td>You are free to use this item for personal research and educational purposes. </td>
+    </tr>
+
+      <tr>
+      <th>Copyright Status</th>
+      <td>In copyright</td>
+    </tr>
+
+  <tr>
+      <th>Review Status</th>
+      <td>Approved</td>
+    </tr>
+
+      <tr>
+      <th>Access Status</th>
+      <td>Public</td>
+    </tr>
+
+      </table>
+  </section>
+
+  <section>
+    <h2>
+      Cultural Notes and Access Considerations
+    </h2>
+    <div class="alert alert-info">
+      This item has been reviewed by a community elder and approved for public access. 
+    </div>
+  </section>
+
+  <section class="my-5">
+    <h2>
+      Request Access to View Collection Item
+    </h2>
+    <form action="",="" method="POST">
+      <div class="form-group">
+            <label for="fullName">Full Name</label>
+    <input type="text" class="form-control" id="fullName" name="fullName" placeholder="Enter your full name">
+  </div>
+  <div class="form-group">
+    <label for="Email">Email</label>
+    <input type="email" class="form-control" id="Email"  name="email"  placeholder="name@example.com">
+      </div>
+       <div class="form-group">
+    <label for="Reason">Reason for Access Request</label>
+    <textarea class="form-control" id="Reason" name="reason" rows="5" placeholder="Please describe why you would like access to this item. Eg. Personal interest, educational etc."></textarea>
+      </div>
+      <button type="submit"
+      class="btn btn-primary">
+    Submit
+    </button>
+    </form>
+  </section>
+</main>
+{% endblock %}

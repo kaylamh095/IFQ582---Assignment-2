@@ -1,0 +1,137 @@
+
+<!-- templates/index.html -->
+{% extends 'base.html' %}
+
+{% block title %}Home Page{% endblock %}
+
+{% block content %}
+
+<!-- Cultural Advisory Notice (Modal) -->
+<div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModal3Label" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModal3Label">Cultural Advisory Notice</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>
+            We acknowledge the Traditional Custodians of the Country throughout Australia and honour their Elders past and present. </p>
+
+            <p>
+                This collection contains Indigenous Knowledge and History. Items are reviewed in collaboration with Indigenous community elders before they are made publicly available.
+            </p>
+            <p>
+                Users should be aware that collection items may contain images, voices or names of Aboriginal and Torres Strait Islander people who have passed away.
+            </p>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Acknowledge</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Jumbotron Hero Section -->
+<div class="jumbotron jumbotron-fluid card card-image" style= "background-image: url('{{ url_for('static', filename='images/heroImage.jpg') }}');">
+  
+  <div class="row justify-content-center mt-5 pb-4">
+    <div class="col-md-8">
+        <div class="jumbotron shadow py-4 mb-5"
+        style="background-color: #F4F0EB;">
+    <h1 class="text-center">Explore Indigenous Knowledge and History</h1>
+    <p class="text-center">
+        Discover a curated collection of items reviewed in partnership with Indigenous community elders.
+    </p>
+    <form class="form-inline d-flex flex-row">
+        <select class="form-control flex-grow-1 my-1 mr-sm-2">
+        <option selected>
+            Select a collection category
+        </option>
+        <option>Photography</option>
+        <option>Artwork</option>
+        <option>Documents and Stories</option>
+        <option>Audio Collection</option>
+    </select>
+    <button type="submit" class="flex-shrink-1 btn btn-primary my-1">
+        Browse Collection
+    </button>
+
+    </form>
+  </div>
+</div>
+</div>
+
+</header>
+<main>
+    <div>
+    
+    <!--Collection Categories-->
+    <section class="container my-5">
+
+    <h2 class="text-center mb-4">Collection Categories</h2>
+
+    <div class="card-deck">
+
+    <article class="card">
+  <img class="card-img-top" 
+  src="{{url_for('static', filename='Images/Photography.jpg')}}"
+  alt="Photography">
+  <div class="card-body">
+    <h4 class="card-title">Photography</h4>
+    <p class="card-text">
+      Historical photographs, community images and visual records.
+    </p>
+    <a href="#!" class="btn btn-primary">View Collection</a>
+  </div>
+  </article>
+
+    <article class="card">
+  <img class="card-img-top" 
+  src="{{url_for('static', filename='Images/Artwork.jpg')}}"
+  alt="Artwork">
+  <div class="card-body">
+    <h4 class="card-title">Artwork</h4>
+    <p class="card-text">
+      Artworks, illustrations and creative works.
+    </p>
+    <a href="#!" class="btn btn-primary">View Collection</a>
+  </div>
+  </article>
+
+    <article class="card">
+  <img class="card-img-top" 
+  src="{{url_for('static', filename='Images/DocumentsandStories.jpg')}}"
+  alt="Documents and Stories">
+  <div class="card-body">
+    <h4 class="card-title">Documents & Stories</h4>
+    <p class="card-text">
+      Written records, stories, reports and articles. 
+    </p>
+    <a href="#!" class="btn btn-primary">View Collection</a>
+  </div>
+  </article>
+
+    <article class="card">
+  <img class="card-img-top" 
+  src="{{url_for('static', filename='Images/Audio.jpg')}}"
+    alt="Audio Collection">
+  <div class="card-body">
+    <h4 class="card-title">Audio Collection</h4>
+    <p class="card-text">
+      Interviews, recordings, music and other audio. 
+    </p>
+    <a href="#!" class="btn btn-primary">View Collection</a>
+  </div>
+  </article>
+
+
+</div>
+ </section>
+ 
+</main>
+
+{% endblock %}
