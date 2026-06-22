@@ -6,16 +6,31 @@
     <meta name="description" content="Library of Indigenous Knowledge and History">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>{%block title%} Library of Indigenous Knowledge and History{% endblock %}</title>
+    <title>Library of Indigenous Knowledge and History</title>
 
-<!-- Bootstrap CSS -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-   
-<!-- Custom CSS -->
-<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+    <!-- Bootstrap CSS -->
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
 </head>
+<style>
+    .navbar-custom {
+    background-color: #37231c;
+    }
+.btn-primary {
+    background-color: #37231C;
+    border-color: #37231C;
+}
 
+.btn-primary:hover {
+    background-color: #4A3027;
+    border-color: #4A3027;
+}
+
+.footer-custom {
+    background-color: #37231c;
+}
+</style>
 <body>
 
 <header>
@@ -32,12 +47,9 @@
 
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav ml-auto">
-      <a class="nav-item nav-link {% if request.endpoint == 'bp.index'%} active{% endif %}" 
-      href="{{ url_for('bp.index') }}">Home </a>
-      <a class="nav-item nav-link {% if request.endpoint == 'bp.item'%} active{% endif %}"
-      href="{{ url_for('bp.item') }}">Collection Item</a>
-      <a class="nav-item nav-link {% if request.endpoint == 'bp.assessment' %}active{% endif %}"
-      href="{{ url_for('bp.assessment') }}">Reviewer Assessment</a>
+      <a class="nav-item nav-link active" href="{{ url_for('bp.index') }}">Home <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="{{ url_for('bp.item') }}">Collection Item</a>
+      <a class="nav-item nav-link" href="{{ url_for('bp.assessment') }}">Assessment</a>
     </div>
 
   </div>

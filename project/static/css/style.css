@@ -1,0 +1,161 @@
+
+/* Navigation */
+.navbar-custom {
+    background-color: #37231c;
+    }
+
+.footer-custom {
+    background-color: #37231c;
+}
+
+main{
+    background-color: #f8f8f8;
+}
+
+/* Navigation */
+.navbar-dark navbar-nav .nav-link {
+    color:#F4F0EB;
+}
+
+.navbar-dark navbar-nav .nav-link {
+    color: #FFFFFF;
+    text-decoration: underline;
+}
+
+.navbar-dark navbar-nav .nav-link.active {
+    color: #FFFFFF;
+    font-weight: 600;
+    border-bottom: 2px solid #F4F0EB;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: #37231C;
+    border-color: #37231C;
+}
+
+.btn-primary:hover {
+    background-color: #4A3027;
+    border-color: #4A3027;
+}
+
+/* Images */
+img {
+    max-width: 100%;
+}
+
+/* Hero Section */
+.hero-section {
+    min-height: 430px;
+    background-image: url("../Images/heroImage.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 70px 0;
+}
+
+.hero-panel {
+    background-color: #F4F0EB;
+    border-radius: 12px;
+}
+
+/* Collection Cards */
+.collection-card {
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.collection-card .card-img-top {
+    height: 160px;
+    object-fit: cover;
+}
+
+.collection-card .card-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.collection-card .btn {
+    margin-top: auto;
+}
+
+.collection-section {
+    background-color: #FFFFFF;
+}
+
+/* Tables */
+.table th,
+.table td {
+    padding: 0.5rem 0.75rem;
+    vertical-align:middle;
+    line-height: 1.4;
+}
+
+.table th {
+    background-color: #F4F0EB;
+    width: 30%;
+}
+
+/* Forms */
+.forms-control {
+    border-color: #4A3027;
+}
+
+/* Modal Alert */
+.alert-cultural {
+    background-color: #F4F0EB;
+    border-left: 5px solid #37231C;
+}
+
+/* Footer */
+.footer-link {
+    color: #FFFFFF;
+}
+
+.footer-link {
+    color:#F4F0EB;
+    text-decoration: underline;
+}
+
+/* Adjustments for Mobile & Tablet */
+@media (max-width: 768px) {
+    .hero-section{
+        min-height: 320px;
+    }
+
+    .collection-card .card-img-top {
+        height: 180px;
+    }
+    .table th,
+    .table td {
+        padding: 0.4rem 0.55rem;
+    }
+}
+/* Assessment Page */
+.assessment-card {
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+}
+
+.assessment-card .card-header {
+    background-color: #37231c;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.assessment-item-image {
+    border-radius: 10px;
+    max-height: 360px;
+    object-fit: cover;
+    width: 100%;
+}
+
+.review-history-item {
+    background-color: #f8f5f1;
+    border-left: 4px solid #37231c;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
