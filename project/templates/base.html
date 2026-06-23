@@ -19,25 +19,48 @@
 <body>
 
 <header>
-    <!--Navigation Bar (Bootstrap)-->
-        <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+<!--Top Navbar-->
+<nav class="navbar navbar-dark navbar-custom">
+  <div class="container">
+
+    <a class="navbar-brand" href="{{ url_for('bp.index')}}">
+      Library of Indigenous Knowledge and History
+    </a>
+    <div class="ml-auto">
+      <a class="btn btn-outline-light btn-sm" href="#!">
+        Login / Account
+      </a>
+    </div>
+  </div>
+</nav>
+
+    <!--Secondary Navigation Bar (Bootstrap)-->
+        <nav class="navbar navbar-expand-lg navbar-dark navbar-custom-secondary">
         <div class="container">
 
-
-  <a class="navbar-brand" href="{{ url_for('bp.index') }}">Library of Indigenous Knowledge and History</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" 
+          type="button" 
+          data-toggle="collapse" 
+          data-target="#mainNavbar" 
+          aria-controls="mainNavbar" 
+          aria-expanded="false" 
+          aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
 
   </button>
 
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav ml-auto">
+  <div class="collapse navbar-collapse justify-content-end" id="mainNavbar">
+    <div class="navbar-nav">
       <a class="nav-item nav-link {% if request.endpoint == 'bp.index'%} active{% endif %}" 
       href="{{ url_for('bp.index') }}">Home </a>
       <a class="nav-item nav-link {% if request.endpoint == 'bp.item'%} active{% endif %}"
       href="{{ url_for('bp.item') }}">Collection Item</a>
       <a class="nav-item nav-link {% if request.endpoint == 'bp.assessment' %}active{% endif %}"
       href="{{ url_for('bp.assessment') }}">Reviewer Assessment</a>
+    <a class="nav-item nav-link {% if request.endpoint == 'bp.assessment' %}active{% endif %}"
+      href="{{ url_for('bp.index') }}#contact">
+      Contact
+      </a>
     </div>
 
   </div>
@@ -67,7 +90,10 @@
 
 $(document).ready(function() {
     // Target the modal ID and show it
+    if (localStorage.getItem('welcomeModalShown') !=='true'){
     $('#exampleModal3').modal('show');
+    localStorage.setItem('welcomeModalShown', 'true');
+    }
 });
 </script>
 

@@ -45,90 +45,206 @@
     <p class="text-center">
         Discover a curated collection of items reviewed in partnership with Indigenous community elders.
     </p>
-
-<form class="form-inline d-flex flex-row justify-content-center">
-  <select class="form-control flex-grow-1 my-1 mr-sm-2">
-        <option selected>
-            Select a collection category
-        </option>
-        <option>Photography</option>
-        <option>Artwork</option>
-        <option>Documents and Stories</option>
-        <option>Audio Collection</option>
-    </select>
-    <button type="submit" class="flex-shrink-1 btn btn-primary my-1">
-        Browse Collection
-    </button>
-
-    </form>
+<div class="text-center mt-4">
+  <a href="{{ url_for('bp.index') }}#collection" class="btn btn-primary my-1 mr-sm-2">
+    Browse Collection
+  </a>
+</div>
   </div>
 </div>
 </div>
 </div>
 </section>
+
+<!--About the collection-->
+<section class="container my-5" id="about">
+    <h2 class="text-center mb-4">About the Collection</h2>
+    <p>
+      The Library of Indigenous Knowledge and History provides access to items documenting Indigenous stories, histories and creative expressions. 
+    </p>
+    <p> 
+      The collection features items that have been reviewed by a Community Elder before being made publicly available. This process supports respectful access to culturally significant material and helps to ensure sensitive items are handled with proper care.
+    </p>
+  </div>
+</div>
+</div>
+
+</section>
+
+<!--Search and filter-->
+<section class="container my-5" id="collection">
+  <div class="row justify-content-center">
+  <div class="col-lg-10">
+
+  <div class="card search-card">
+    <div class="card-header">
+      Search the Collection
+    </div>
+    <div class="card-body">
+
+<!--Connect Filter controls (collection_items)-->
+<form method="GET">
+  <div class="form-group">
+        <label for="searchKeyword">Search</label>
+        <input type="text"
+        class="form-control"
+        id="searchKeyword"
+        name="search"
+        placeholder="Search by title, category, cultural group, access level or keyword">
+      </div>
+
+  <div class="form-row">
+
+      <div class="form-group col-md-5">
+        <label for="categoryFilter">Category</label>
+        <select class="form-control" id="categoryFilter" name="category">
+          <option value="">All Categories</option>
+          <option value="Photography">Photography</option>
+          <option value="Artwok">Artwork</option>
+          <option value="Documents and Stories">Documents and Stories</option>
+          <option value="Audio Collection">Audio Collection</option>
+          <option value="Cultural Artefacts">Cultural Artefacts</option>
+        </select>
+      </div>
+
+      <div class="form-group col-md-5">
+        <label for="accessFilter">Access Level</label>
+        <select class="form-control" id="accessFilter" name="access">
+          <option value="">All Access Levels</option>
+          <option value="Public">Public</option>
+          <option value="Restricted">Restricted</option>
+          <option value="Private">Private</option>
+          </select>
+      </div>
+      <div class="form-group col-md-2 d-flex align-items-end">
+        <button type="submit" class="btn btn-primary w-100">
+          Submit
+        </button>
+      </div>
+      </div>
+</form>
+</div>
+</div>
+</div>
+</section>
     
-    <!--Collection Categories-->
-    <section class="container my-5">
+    <!--Featured items from the collection-->
+    <section class="featured-items-section py-5 id=featured-items">
+    <div class="container">
 
-    <h2 class="text-center mb-4">Collection Categories</h2>
+    <h2 class="text-center mb-4">Featured Collection Items</h2>
 
-    <div class="card-deck">
+    <div class="row">
 
-    <article class="card">
+    <div class="col-lg-3 col-md-6 mb-4">
+      <article class="card collection-card h100">
+
   <img class="card-img-top" 
   src="{{url_for('static', filename='Images/Photography.jpg')}}"
   alt="Photography">
   <div class="card-body">
-    <h4 class="card-title">Photography</h4>
+    <h4 class="card-title">Item Title</h4>
     <p class="card-text">
-      Historical photographs, community images and visual records.
+      Item description
     </p>
-    <a href="#!" class="btn btn-primary">View Collection</a>
+    <p class="small mb1"><strong>Category:</strong>Category</p>
+    <a href="{{ url_for('bp.item')}}" class="btn btn-primary">View Item</a>
   </div>
   </article>
+</div>
 
-    <article class="card">
+  <div class="col-lg-3 col-md-6 mb-4">
+    <article class="card collection-card h-100">
   <img class="card-img-top" 
   src="{{url_for('static', filename='Images/Artwork.jpg')}}"
   alt="Artwork">
   <div class="card-body">
-    <h4 class="card-title">Artwork</h4>
+    <h4 class="card-title">Item Title</h4>
     <p class="card-text">
-      Artworks, illustrations and creative works.
+      Item Description
     </p>
-    <a href="#!" class="btn btn-primary">View Collection</a>
+     <p class="small mb1"><strong>Category:</strong>Category</p>
+    <a href="{{ url_for('bp.item')}}" class="btn btn-primary">View Item</a>
   </div>
   </article>
+  </div>
 
-    <article class="card">
+  <div class="col-lg-3 col-md-6 mb-4">
+    <article class="card collection-card h-100">
   <img class="card-img-top" 
-  src="{{url_for('static', filename='Images/DocumentsandStories.jpg')}}"
-  alt="Documents and Stories">
+  src="{{url_for('static', filename='Images/Artwork.jpg')}}"
+  alt="Artwork">
   <div class="card-body">
-    <h4 class="card-title">Documents & Stories</h4>
+    <h4 class="card-title">Item Title</h4>
     <p class="card-text">
-      Written records, stories, reports and articles. 
+      Item Description
     </p>
-    <a href="#!" class="btn btn-primary">View Collection</a>
+     <p class="small mb1"><strong>Category:</strong>Category</p>
+    <a href="{{ url_for('bp.item')}}" class="btn btn-primary">View Item</a>
   </div>
   </article>
+  </div>
 
-    <article class="card">
+  <div class="col-lg-3 col-md-6 mb-4">
+    <article class="card collection-card h-100">
   <img class="card-img-top" 
-  src="{{url_for('static', filename='Images/Audio.jpg')}}"
-    alt="Audio Collection">
+  src="{{url_for('static', filename='Images/Artwork.jpg')}}"
+  alt="Artwork">
   <div class="card-body">
-    <h4 class="card-title">Audio Collection</h4>
+    <h4 class="card-title">Item Title</h4>
     <p class="card-text">
-      Interviews, recordings, music and other audio. 
+      Item Description
     </p>
-    <a href="#!" class="btn btn-primary">View Collection</a>
+     <p class="small mb1"><strong>Category:</strong>Category</p>
+    <a href="{{ url_for('bp.item')}}" class="btn btn-primary">View Item</a>
   </div>
   </article>
-
-
+  </div>
 </div>
  </section>
  
+<!--Contact-->
+<section class="container my-5" id="contact">
+  <div class="card contact-card">
+    <div class="card-header">
+      Contact Us
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6">
+          <h3>Library Contact Details</h3>
+          <p>
+            For questions about the collection including access, review decisions, please contact the library team.
+          </p>
+          <p><strong>Phone:</strong> +61 07 1234 1234</p>
+          <p><strong>Email:</strong> </p> enquiries@indigenouslibrary.org.au</p>
+          <p><strong>Address:</strong> </p> Cultural Precinct, Stanley Pl, South Brisbane QLD 4101</p>
+        </div>
+
+        <div class="col-md-6">
+          <h3>Opening Hours</h3>
+
+          <table class="table table-bordered">
+            <tbody>
+              <tr>
+                <th>Monday to Friday</th>
+                <td>9:00am - 5:30pm</td>
+              </tr>
+               <tr>
+                <th>Saturday</th>
+                <td>10:00am - 3:00pm</td>
+              </tr>
+               <tr>
+                <th>Sunday</th>
+                <td>Closed</td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 {% endblock %}
