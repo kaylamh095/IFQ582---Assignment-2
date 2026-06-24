@@ -1,4 +1,0 @@
-To Do: 
-
-Confirm that these three files are fully superseded
-by the ones in templates/, and then delete this folder
