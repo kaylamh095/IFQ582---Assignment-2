@@ -1,20 +1,36 @@
 ### REF: IFQ582-5.8
 ### import flask and blueprint / route template
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, flash, redirect, url_for
+from forms import RegisterForm
+from db import check_for_user, add_user
+
 bp = Blueprint('bp', __name__) 
 
 
-### index route was showing a 404 inline in the home page, so I swapped to / to redirect to index.html --kath
-###@bp.route('/index/', methods = ['GET', 'POST']) 
 @bp.route('/', methods = ['GET', 'POST']) 
-
 def index(): 
-
     return render_template('index.html')
 
 
-@bp.route('/item/', methods = ['POST', 'GET']) 
+@bp.route('/register/', methods=['POST', 'GET'])
+def register():
+    form = RegisterForm()
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            # Check if the user already exists
+            user = check_for_user(form.email.data, form.password.data)
+            if user:
+                flash('User already exists', 'error')
+                return redirect(url_for('main.register'))
 
+            add_user(form)
+            flash('Registration successful!')
+            return redirect(url_for('main.login'))
+
+    return render_template('register.html', form=form)
+
+
+@bp.route('/item/', methods = ['POST', 'GET']) 
 def item(): 
     if request.method == "POST":
 
@@ -25,7 +41,6 @@ def item():
 
 
 @bp.route('/assessment/', methods = ['GET', 'POST']) 
-
 def assessment(): 
     if request.method == "POST":
 
