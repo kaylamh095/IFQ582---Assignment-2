@@ -4,7 +4,7 @@ from flask import Flask,  render_template
 
 app = Flask(__name__)
 
-### creat the web app which will run on local server http://127.0.0.1:5000 (default port)
+### create the web app which will run on local server http://127.0.0.1:5000 (default port)
 def create_app():
     app.debug=True
 
