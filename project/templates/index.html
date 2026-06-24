@@ -128,20 +128,30 @@
 </div>
 </section>
     
-    <!--Featured items from the collection-->
+    <!--Search results OR Featured items from the collection-->
     <section class="featured-items-section py-5" id="featured-items">
     <div class="container">
-
+    
+    {% if search_performed %}
+    <h2 class="text-center mb-4">Search Results</h2>
+    <p class="text-center text-muted mb-4">
+      Items that match your search
+    </p>
+    {% else %}
     <h2 class="text-center mb-4">Featured Collection Items</h2>
+    <p class="text-center text-muted mb-4">
+      Explore a curated collection of items from the Library.
+    </p>
+    {% endif %}
 
     <div class="row">
 
     <div class="col-lg-3 col-md-6 mb-4">
       <article class="card collection-card h100">
+      <img class="card-img-top" 
+      src="{{url_for('static', filename='Images/Photography.jpg')}}"
+      alt="Photography">
 
-  <img class="card-img-top" 
-  src="{{url_for('static', filename='Images/Photography.jpg')}}"
-  alt="Photography">
   <div class="card-body">
     <h4 class="card-title">Item Title</h4>
     <p class="card-text">

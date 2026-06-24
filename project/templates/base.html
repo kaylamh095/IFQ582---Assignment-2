@@ -53,11 +53,19 @@
     <div class="navbar-nav">
       <a class="nav-item nav-link {% if request.endpoint == 'bp.index'%} active{% endif %}" 
       href="{{ url_for('bp.index') }}">Home </a>
+          <a class="nav-item nav-link"
+      href="{{ url_for('bp.index') }}#about">
+      About
+      </a>
+          <a class="nav-item nav-link"
+      href="{{ url_for('bp.index') }}#featured-items">
+      Collection
+      </a>
       <a class="nav-item nav-link {% if request.endpoint == 'bp.item'%} active{% endif %}"
       href="{{ url_for('bp.item') }}">Collection Item</a>
       <a class="nav-item nav-link {% if request.endpoint == 'bp.assessment' %}active{% endif %}"
       href="{{ url_for('bp.assessment') }}">Reviewer Assessment</a>
-    <a class="nav-item nav-link {% if request.endpoint == 'bp.assessment' %}active{% endif %}"
+    <a class="nav-item nav-link"
       href="{{ url_for('bp.index') }}#contact">
       Contact
       </a>
@@ -93,6 +101,9 @@
     <ul class="list-unstyled mb-0">
     <li>
       <a class="footer-link" href="{{url_for('bp.index')}}">Home</a>
+    </li>
+     <li>
+      <a class="footer-link" href="{{url_for('bp.index')}}#about">About</a>
     </li>
         <li>
       <a class="footer-link" href="{{url_for('bp.index')}}#collection">Browse Collection</a>
