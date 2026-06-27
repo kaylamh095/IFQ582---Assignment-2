@@ -4,7 +4,7 @@ from flask import Blueprint, render_template, request, flash, redirect, url_for
 from .forms import RegisterForm
 #from .db import check_for_user, add_user
 from .db.user import check_for_user, add_user
-from . import mysql
+from .db.connection import cursor
 
 
 bp = Blueprint('bp', __name__) 
@@ -58,7 +58,7 @@ def assessment():
 ### @app.route('/scratch')
 @bp.route('/scratch')
 def scratch():
-    cur = mysql.connection.cursor() ### open a cursor to the db
+    cur = cursor() ### open a cursor to the db
     ###cur.execute("SELECT * FROM collection_items") ### run the query
     cur.execute("SELECT title FROM collection_items") ### run the query
     results = cur.fetchall() ### get all query results

@@ -3,6 +3,7 @@ import os
 from flask_mysqldb import MySQL
 from .connection import cursor
 
+### Global mysql variable, initialised in set_up_database
 mysql: MySQL
 
 def get_env_contents(app):
@@ -16,7 +17,7 @@ def get_env_contents(app):
 
    def set_in_app_config(key):
       value = os.getenv(key)
-      if not key:
+      if not value:
          raise Exception("Your .env file needs to specify " + key)
       app.config[key] = value
 
@@ -31,7 +32,10 @@ def set_up_database(app):
    '''Sets up the database connection and ensures it works, raising errors if it doesn't'''
    global mysql
    get_env_contents(app)
+
+   ### Initialise the mysql global variable
    mysql = MySQL(app)
+
    with app.app_context():
       # Above is only needed here because db is called outside a route handler.
       # Normally Flask supplies it behind the scenes.
