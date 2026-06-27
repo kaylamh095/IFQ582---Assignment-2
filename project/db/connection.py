@@ -1,8 +1,6 @@
-from .setup import mysql
-
-
 def connection():
    '''Supplies a database connection with no type errors'''
+   from .setup import mysql
    assert mysql.connection is not None
    return mysql.connection
 
