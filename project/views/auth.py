@@ -5,7 +5,7 @@ from hashlib import sha256
 from ..forms import RegisterForm
 from ..db.user import check_for_user, add_user
 
-bp = Blueprint('bp', __name__) 
+bp = Blueprint('auth', __name__)
 
 
 @bp.route('/register/', methods=['POST', 'GET'])

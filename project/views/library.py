@@ -3,7 +3,7 @@
 from flask import Blueprint, render_template, request
 
 
-bp = Blueprint('bp', __name__) 
+bp = Blueprint('library', __name__)
 
 @bp.route('/item/', methods = ['POST', 'GET']) 
 def item(): 
