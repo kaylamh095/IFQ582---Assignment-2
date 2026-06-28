@@ -9,7 +9,7 @@
 
 ## Overview:
 
-The Library of Indigenous Knowledge and History was created for a prominent academic library in Australia who had begun digitising their Indigenous collections.  Given the nature of the collections, the library have chosen to handle their data in an ethical way with appropriate respect to the Indigenous owners of the items, in adherence with the CARE principles.
+The Library of Indigenous Knowledge and History was created for a prominent academic library in Australia who have begun digitising their Indigenous collections.  Given the nature of the collections, the library have chosen to handle their data in an ethical way with appropriate respect to the Indigenous owners of the items, in adherence with the CARE principles.
 
 The library has engaged with local community elders to assess the collection and receive community input on how the data is to be managed.  
 
