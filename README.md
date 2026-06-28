@@ -88,3 +88,4 @@ Password: publicuser
 * Search and browse publicly available items from the home page
 * Select an item to view item details
 * Submit an access request to view an item at the library
+* Navigate to 'My Account' to update contact details or change password
