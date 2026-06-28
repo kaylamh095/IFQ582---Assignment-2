@@ -5,6 +5,20 @@
 
 {% block content %}
 
+<p>Item record
+
+{% for item in data %}
+    <p>Item ID : {{item.item_id}}</p>
+    <p>Title : {{item.title}}</p>
+    <p>Description : {{item.description}}</p>
+    <p>Image Link : {{item.image_link}}</p>
+    <p>Item Category : {{item.item_category}}</p>
+    <p>Cultural Group : {{item.cultural_group}}</p>
+    <p>Sensitivity Notes : {{item.sensitivity_notes}}</p>
+    <p>Review Status : {{item.review_status}}</p>
+    <hr>
+{% endfor %}
+
 
 
 {% endblock %}
