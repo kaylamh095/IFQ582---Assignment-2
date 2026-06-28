@@ -5,7 +5,7 @@
 * Community Reviewer / Elder engagement to review and update cultural metadata (including approving or rejecting public access to items)
 * Library staff can create and edit collection items, include uploading new images and reviewing access requests
 * Public users are able to browse all publicly available items and submit access requests
-* Current database has over 15 collection items across multiple categories (Historical Photographs, audio recordings of oral histories, archival manuscripts and documents, artwork created by Indigenous artists, cultural artefact records and language preservation materials)
+* Current database has over 15 collection items across multiple categories (historical photographs, audio recordings of oral histories, archival manuscripts and documents, artwork created by Indigenous artists, cultural artefact records and language preservation materials)
 
 ## Overview:
 
