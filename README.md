@@ -24,7 +24,7 @@ The library has engaged with local community elders to assess the collection and
 
 ### Prerequisites
 * Python 3.10+
-* MySQL 8.x (running locally)
+* MySQL (running locally)
 * A local database instance
 
 ### Setup Instructions
