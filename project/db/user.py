@@ -4,16 +4,33 @@ from .connection import cursor, connection
 from ..models.user import User
 
 def check_for_user(email, password):
+    '''
+    Takes email and hashed password. 
+    Returns User and three fields: is_staff, is_admin, is_elder
+    '''
     cur = cursor()
     cur.execute("""
-        SELECT ID, first_name, last_name, email, phone
-        FROM user
+        SELECT ID, first_name, last_name, email, phone, ls.employee_ID, ls.is_admin, ce.elder_ID
+        FROM user u
+        LEFT join library_staff ls on u.ID = ls.user_id
+        LEFT join community_elder ce on u.ID = ce.user_id
         WHERE email = %s AND password = %s
     """, (email, password))
     row = cur.fetchone()
     cur.close()
+    is_staff = False
+    is_admin = False
+    is_elder = False
     if row:
-        return User(row['first_name'], row['last_name'], row['email'], row['phone'], password)
+         if row['employee_ID']:
+            is_staff = True
+         if row['is_admin']:
+            is_admin = True
+         if row['elder_ID']:
+            is_elder = True
+         return ( User(row['first_name'], row['last_name'], 
+                  row['email'], row['phone'], password),
+                  is_staff, is_admin, is_elder)
     return None
 
 
