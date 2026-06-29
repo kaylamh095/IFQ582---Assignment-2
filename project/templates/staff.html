@@ -5,7 +5,221 @@
 
 {% block content %}
 
+<!-- Create Collection Items-->
 
 
+
+
+
+<!-- Manage Collection Items-->
+
+<section class="container px-3 px-md-5 my-4">
+        <div class="card admin-card">
+            <div class="card-header">
+                Manage Collection Items
+            </div>
+
+            <div class="card-body">
+                <p class="text-muted">
+                    Edit existing collection items.
+                </p>
+
+            <div class="table-responsive">
+                <table class="table align-middle dashboard-table admin-items-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Item ID</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Access Level</th>
+                            <th scope="col">Review Status</th>
+                            <th scope="col" class="text-center">Manage</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for item in items %}
+                        <tr>
+                            <td>{{item.item_id}}</td>
+                            <td>{{item.title}}</td>
+                            <td>{{item.item_category}}</td>
+                            <td>{{item.access_level}}</td>
+                            <td>
+                                {% if item.review_status == 'Public' %}
+                                <span class="badge text-bg-success">{{ item.review_status }}</span>
+                                {% elif item.review_status == 'Under Review'%}
+                                <span class="badge text-bg-warning">Under Review</span>
+                                {% else %}
+                                <span class="badge text-bg-light">{{item.review_status}}</span>
+                                {% end if %}
+                            </td>
+                            <td class="text-center">
+                            <div class="d-flex justify-content-center gap-2">
+                                <button type="button"
+                                class="btn btn-primary btn-sm"
+                                data-bs-toggle="modal"
+                                data-bs-target="#editItemModal">
+                                Edit
+                                </button>
+                            </div>
+                            </td>
+                        </tr>
+                    {% end for %}
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </div>
+
+<!-- Edit Item Button - Placeholder Modal-->
+<div class="modal fade" id="editItemModal" tabindex="1" aria-labelledby="editItemModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content admin-modal">
+            
+            <div class="modal-header">
+                <h2 class="modal-title h5" id="editItemModalLabel">
+                    Edit Collection Item
+                </h2>
+                <button type="button" 
+                        class="btn-close" 
+                        data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <p class="text-muted">
+                    Make any changes and then save to update the item.
+                </p>
+
+                <form method="POST" action="#!" enctype="multipart/form-data">
+
+                    <div class="mb-3">
+                        <label for="editItemTitle" class="form-label">Title</label>
+                        <input type="text"
+                            class="form-control"
+                            id="editItemTitle"
+                            name="title"
+                            placeholder="Item Title">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="editItemDescription" class="form-label">Description</label>
+                        <textarea class="form-control"
+                            id="editItemDescription"
+                            name="description"
+                            rows="4"
+                            placeholder="Item Description"></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="editItemImage" class="form-label">Image</label>
+                        <input type="file"
+                            class="form-control"
+                            id="editItemImage"
+                            name="image_link"
+                            placeholder=".png,.jpg,.jpeg">
+                    </div>
+        
+                    <div class="mb-3">
+                        <label for="editItemCategory" class="form-label">Category</label>
+                        <input type="text"
+                            class="form-control"
+                            id="editItemCategory"
+                            name="item_category"
+                            placeholder="Item Category">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="editCulturalGroup" class="form-label">Cultural Group</label>
+                        <input type="text"
+                            class="form-control"
+                            id="editCulturalGroup"
+                            name="cultural_group"
+                            placeholder="Cultural Group">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="editSensitivityNotes" class="form-label">Sensitivity Note</label>
+                        <textarea class="form-control"
+                            id="editSensitivityNotes"
+                            name="sensitivity_notes"
+                            rows="3"
+                            placeholder="Sensitivity notes"></textarea>
+                    </div>   
+
+                    <div class="mb-3">
+                        <label for="editReviewStatus" class="form-label">Review Status</label>
+                        <select class="form-select" id="editReviewStatus" name="review_status">
+                            <option selected>Pending Review</option>
+                        </select>
+                    </div>
+
+                     <div class="mb-3">
+                        <label for="editAccessLevel" class="form-label">Access Level</label>
+                        <select class="form-select" id="editReviewStatus" name="access_level">
+                            <option selected>Public</option>
+                            <option>Restricted</option>
+                            <option>Private</option>
+                        </select>
+                    </div>
+
+                    <div class="d-flex justify-content-end gap-2 mt-4">
+                        <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">
+                            Cancel
+                        </button>
+
+                        <button type="submit" class="btn btn-primary">
+                            Save
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</section>
+
+<!-- View Access Requests-->
+
+<section class="container px-3 px-md-5 my-4">
+    <div class="card admin-card">
+        <div class="card-header">
+            View Access Requests
+        </div>
+
+    <div class="card-body">
+        <p class="text-muted">
+            View user access requests
+        </p>
+
+        <div class="table-responsive">
+            <table class="table align-middle dashboard-table admin-access-table">
+                <thead>
+                    <tr>
+                        <th scope="col">Request ID</th>
+                        <th scope="col">Item</th>
+                        <th scope="col">Requested By</th>
+                        <th scope="col">Reason</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+
+            </tbody>
+                <tr>
+                    <td>Request12</td>
+                    <td>Title</td>
+                    <td>Name</td>
+                    <td>Reason</td>
+                    <td>
+                    <span class="badge text-bg-warning">Pending</span>
+                    </td>
+                </tr>
+            </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+</section>
 
 {% endblock %}
