@@ -17,7 +17,7 @@ class UpdateItemForm(FlaskForm):
     sensitivity_notes = TextAreaField('Sensitivity Notes', validators=[InputRequired()])
     review_status = TextAreaField('Review Status', validators=[InputRequired()])
     access_level = StringField('Access Level', validators=[InputRequired()])
-    submit = SubmitField('Post')  
+    submit = SubmitField('Submit')  
 
 
 class LoginForm(FlaskForm):
