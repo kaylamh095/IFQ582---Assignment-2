@@ -108,11 +108,14 @@
 
                 <div class="mb-3">
                     <span class="badge text-bg-light me-1">Category</span>
-                    <span class="badge text-bg-light me-1">Access Level</span>
+                    <span class="badge text-bg-warning me-1">Restricted</span>
                 </div>
+                <p class="text-muted small mb-3">
+                    This item is restricted. Please submit an access request to view additional details.
+                </p>
 
-                <a href="{{ url_for('library.item')}}" class="btn btn-primary btn-sm">
-                    View Item
+                <a href="{{ url_for('library.item')}}#access-request" class="btn btn-primary btn-sm">
+                    Request Access
                 </a>
             </div>
         </div>
@@ -140,7 +143,7 @@
 
                 <div class="mb-3">
                     <span class="badge text-bg-light me-1">Category</span>
-                    <span class="badge text-bg-light me-1">Access Level</span>
+                    <span class="badge text-bg-light me-1">Public</span>
                 </div>
 
                 <a href="{{ url_for('library.item')}}" class="btn btn-primary btn-sm">
