@@ -118,7 +118,7 @@ img {
     background-image: linear-gradient(
     #F8F5F180, 
     #F8F5F180
-    ), url("../Images/heroImage.jpg");
+    ), url("../img/heroImage.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
