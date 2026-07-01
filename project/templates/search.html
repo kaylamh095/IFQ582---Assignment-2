@@ -1,0 +1,104 @@
+
+<!-- templates/kath.html -->
+{% extends 'base.html' %}
+
+{% block title %}Item Details{% endblock %}
+
+{% block content %}
+
+{% for item in items %}
+<section class="container px-3 px-md-5 my-5">
+  <div class="mb-4">
+    <a href="{{url_for('main.index') }}#featured-items" class="btn btn-outline-dark btn-sm">
+      Return to Collection
+    </a>
+  </div>
+<div class="card item-detail-card">
+  <div class="card-header">
+    Collection Item
+  </div>
+
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-5 mb-4 mb-md-0">
+              <img src="{{ url_for('static', filename=item.image_link) }}" 
+      class="img-fluid item-detail-image"
+      alt="Collection item image">
+    </div>
+    
+    <div class="col-md-7">
+      <h1 class="mb-3">{{ item.title }}</h1>
+      <p>
+        {{ item.description }}
+      </p>
+
+      <p class="mb-2">
+        <strong>Access Level:</strong> {{ item.access_level }}
+      </p>
+
+      <a href="#request-access" class="btn btn-primary mt-2">
+      Request Access to This Item
+    </a>
+    </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="container px-3 px-md-5 my-5">
+
+  <div class="card item-detail-card">
+    <div class="card-header">
+    Item Information
+  </div>
+
+  <div class="card-body">
+  <div class="table-responsive">
+  <table class="table table-bordered">
+    <tbody>
+    <tr>
+      <th>Item ID</th>
+      <td>{{ item.item_id }}</td>
+    </tr>
+
+    <tr>
+      <th>Category</th>
+      <td>{{ item.item_category }}</td>
+    </tr>
+
+  <tr>
+      <th>Cultural Group</th>
+      <td>{{ item.cultural_group }}
+    </tr>
+
+     <tr>
+      <th>Access Level</th>
+      <td>{{ item.access_level }}</td>
+    </tr>
+
+    </tbody>
+  </table>
+  </div>
+  </div>
+</div>
+</section>
+
+<section class="container px-3 px-md-5 my-5">
+<div class="card item-detail-card">
+  <div class="card-header">
+    Cultural Notes and Access Considerations
+</div>
+<div class="card-body">
+  <p>
+  Collection items may be subject to specific cultural access conditions or sensitivity notes. Users are required to adhere to these guidelines to ensure materials are accessed in a respectful manner.
+</p>
+<div class="alert alert-cultural mb-0">
+  <strong>Sensitivity Notes:</strong>
+  {{ item.sensitivity_notes }}
+</div>
+</div>
+</div>
+</section>
+
+  {% endfor %}
+{% endblock %}
