@@ -40,13 +40,29 @@ def get_collection_items():
     
 def get_access_requests():
     cur = mysql.connection.cursor()
-    cur.execute("SELECT request_id, user_ID, item_ID, request_date, status FROM access_requests")
+    cur.execute("SELECT request_id, item_id, member_id, request_status, review_timestamp FROM access_request")
     requests = cur.fetchall()
     cur.close()
     return [AccessRequest(
         request_id=str(row['request_id']),
-        user_ID=str(row['user_ID']),
-        item_ID=str(row['item_ID']),
-        request_date=row['request_date'],
-        status=row['status']
+        item_id=str(row['item_id']),
+        member_id=str(row['member_id']),
+        request_status=row['request_status'],
+        review_timestamp=row['review_timestamp']
     ) for row in requests]
+
+def get_account_info(user_id):
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT first_name, last_name, email, phone, password FROM user WHERE id = %s", (ID))
+    row = cur.fetchone()
+    cur.close()
+    if row:
+        return User(
+            first_name=row['first_name'],
+            last_name=row['last_name'],
+            email=row['email'],
+            phone=row['phone'],
+            password=None,
+            ID=str(row['id']),
+        ) 
+    return None

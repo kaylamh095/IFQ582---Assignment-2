@@ -1,6 +1,7 @@
 ### import flask and blueprint / route template
 from flask import Blueprint, render_template, flash, request, url_for, redirect, app
-from flask_login import current_user
+from flask_login import current_user, login_required
+from flask_wtf import form
 from project.db.admin_db import get_access_requests, get_collection_items, get_user_role
 from project.forms import UpdateAccountForm, UpdateItemForm, UpdateRoleForm
 from wtforms import form
@@ -30,8 +31,13 @@ def add_item():
         mysql.connection.commit()
         cur.close()
         flash('Item added successfully!', 'success')
+<<<<<<< HEAD
+        return redirect(url_for('admin.admin'))
+    return render_template('admin.html', title='Admin', form=form, users=get_user_role(), items=get_collection_items(), requests=get_access_requests())
+=======
         return redirect(url_for('admin.admin_dashboard'))
     return render_template('add_item.html', form=form,)
+>>>>>>> 8b6fb3fff5c158b89a246f0ac9f57561b085e584
 
 
 @bp.route('/admin/update_role/<int:user_id>', methods=['POST'])
@@ -63,6 +69,8 @@ def manage_item(item_id):
     return redirect(url_for('admin.manage_collection_page'))
 
 
+
+
 @bp.route('/admin/manage_access_requests', methods=['GET', 'POST'])
 def manage_access_requests():
     if request.method == 'POST':
@@ -70,24 +78,35 @@ def manage_access_requests():
         new_status = request.form.get('new_status')
         if request_id and new_status:
             cur = mysql.connection.cursor()
-            cur.execute("UPDATE access_requests SET status = %s WHERE request_id = %s", (new_status, request_id))
+            cur.execute("UPDATE access_request SET request_status = %s WHERE request_id = %s", (new_status, request_id))
             mysql.connection.commit()
             cur.close()
             flash('Access request status updated successfully!', 'success')
         else:
             flash('Invalid request ID or status.', 'error')
-    db_requests = get_access_requests()
-    return render_template('admin.access_requests.html', requests=db_requests)
+    return render_template('admin.html', requests=get_access_requests(), title='Manage Access Requests')
+
+
+
+# ================Account Page ================
 
 @bp.route('/account/', methods=['GET', 'POST'])
+@login_required
 def update_account():
     form = UpdateAccountForm()
     if form.validate_on_submit():
         cur = mysql.connection.cursor()
-        cur.execute("UPDATE user SET phone = %s, email = %s, password = %s WHERE user_ID = %s", (form.phone.data, form.email.data, form.password.data, current_user.user_ID))
+        cur.execute("UPDATE user SET phone = %s, email = %s, password = %s WHERE id = %s", (form.phone.data, form.email.data, form.password.data, current_user.ID))
         mysql.connection.commit()
         cur.close()
         flash('Account updated successfully!', 'success')
         return redirect(url_for('admin.update_account'))
+<<<<<<< HEAD
+    elif request.method == 'GET':
+        form.phone.data = current_user.phone
+        form.email.data = current_user.email
+    return render_template('account.html', title='Update Account', form=form)
+=======
     return render_template('admin.account.html', title='Update Account', form=form)
     return redirect(url_for('admin.admin_dashboard'))
+>>>>>>> 8b6fb3fff5c158b89a246f0ac9f57561b085e584
