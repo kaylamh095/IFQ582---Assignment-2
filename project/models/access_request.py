@@ -2,21 +2,21 @@ from datetime import datetime
 
 class AccessRequest:
     # Constructor
-    def __init__(self, request_id, request_reason, item):
+    def __init__(self, request_id, item_id, member_id, request_status,review_timestamp):
         self.request_id = request_id
-        self.request_reason = request_reason
-        self.request_status = "Draft"   # default status
-        self.request_timestamp = datetime.now()   # current date/time
-        self.item = item
+        self.item_id = item_id
+        self.member_id = member_id
+        self.request_status = request_status
+        self.review_timestamp = review_timestamp
 
     # Get AccessRequest details
     def get_access_request_details(self):
         return {
             "Request ID": self.request_id,
-            "Item ID": self.item.item_id,
-            "Request Reason": self.request_reason,
+            "Item ID": self.item_id,
+            "Member ID": self.member_id,
             "Request Status": self.request_status,
-            "Request Timestamp": self.request_timestamp
+            "Review Timestamp": self.review_timestamp
         }
 
 
@@ -26,22 +26,22 @@ class AccessRequest:
             f"\nAccess Request\n"
             f"------------------------\n"
             f"Request ID: {self.request_id}\n"
-            f"Item ID: {self.item.item_id}\n"
-            f"Reason: {self.request_reason}\n"
+            f"Item ID: {self.item_id}\n"
+            f"Member ID: {self.member_id}\n"
             f"Status: {self.request_status}\n"
-            f"Timestamp: {self.request_timestamp}\n"
+            f"Review Timestamp: {self.review_timestamp}\n"
         )
 
 
     # Submit request
     def submit_request(self):
         self.request_status = "Submitted"
-        self.request_timestamp = datetime.now()
+        self.review_timestamp = datetime.now()
         print("Access request submitted.")
 
 
     # Cancel request
     def cancel_request(self):
         self.request_status = "Cancelled"
-        self.request_timestamp = datetime.now()
+        self.review_timestamp = datetime.now()
         print("Access request cancelled.")
