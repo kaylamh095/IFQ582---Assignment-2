@@ -33,16 +33,23 @@ def add_item():
     return render_template('add_item.html', title='Add New Item', form=form)
 
 
-@bp.route('/admin/update_role/<int:user_id>', methods=['POST'])
+@bp.route('/admin/update_role/<int:user_id>', methods=['GET', 'POST'])
 def update_user_role(user_id):
     new_role = request.form.get('new_role')
-    
+    action = request.form.get('action')
+
     if new_role is not None:
         cur = mysql.connection.cursor()
         cur.execute("UPDATE library_staff SET is_admin = %s WHERE user_ID = %s", (new_role, user_id))
         mysql.connection.commit()
         cur.close()
         flash('User role updated successfully!', 'success')
+    elif action == 'delete':
+        cur = mysql.connection.cursor()
+        cur.execute("DELETE FROM library_staff WHERE user_ID = %s", (user_id,))
+        mysql.connection.commit()
+        cur.close()
+        flash('User deleted successfully!', 'success')
     
     return redirect(url_for('admin.admin_dashboard'))
 
@@ -93,6 +100,13 @@ def update_account():
         cur.close()
         flash('Account updated successfully!', 'success')
         return redirect(url_for('admin.update_account'))
+    #elif action == 'delete':
+        cur = mysql.connection.cursor()
+        cur.execute("DELETE FROM user WHERE id = %s", (current_user.ID,))
+        mysql.connection.commit()
+        cur.close()
+        flash('Account deleted successfully!', 'success')
+
     elif request.method == 'GET':
         form.phone.data = current_user.phone
         form.email.data = current_user.email
