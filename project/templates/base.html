@@ -38,7 +38,7 @@
       </a> -->
 
       {% if session.get("logged_in") %}
-          <!-- <a class="btn btn-outline-light btn-sm" href="{{ url_for('admin.admin')}}">Admin Page</a> -->
+          <a class="btn btn-outline-light btn-sm" href="{{ url_for('admin.admin_dashboard')}}">Admin Page</a>
           <!-- Below url will need updating once we have an Account address -->
           <a class="btn btn-outline-light btn-sm" href="{{ url_for('main.index')}}">Account</a>
           <a class="btn btn-outline-light btn-sm" href="{{ url_for('login.logout')}}">Logout</a>
