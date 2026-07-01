@@ -98,7 +98,6 @@ img {
     font-size: 0.95rem;
 }
 
-.footer-custom h5
 .footer-heading {
     color: #FFFFFF;
     font-weight: 600;
@@ -120,6 +119,7 @@ img {
 .footer-logo {
     height: 35px;
     width: auto;
+    flex-shrink: 0;
 }
 
 .footer-about {
@@ -127,11 +127,6 @@ img {
     font-size: 0.95rem;
     line-height: 1.6;
     color: var(--colour-parchment);
-}
-
-.footer-reference {
-    color: var(--colour-parchment);
-    font-size: 0.95rem;
 }
 
 .footer-list li {
@@ -143,13 +138,15 @@ img {
     text-decoration: none;
 }
 
-.footer-link:hover {
+.footer-link:hover,
+.footer-link:focus {
     color:#FFFFFF;
     text-decoration: underline;
 }
 
 .footer-social-links {
     display: flex;
+    flex-wrap: wrap;
     gap: 0.85rem;
     margin-top: 1rem;
 }
@@ -160,7 +157,8 @@ img {
     text-decoration: none;
 }
 
-.footer-icon-link:hover {
+.footer-icon-link:hover,
+.footer-icon-link:focus {
     color: var(--colour-border);
 
 }
@@ -351,6 +349,13 @@ img {
     background-color: var(--colour-parchment);
     border-radius: 10px;
     margin-top: 2rem;
+}
+
+.hero-card h1 {
+    font-size: 2.2rem;
+    line-height: 1.15;
+    font-weight: 700;
+    color: var(--colour-espresso);
 }
 
 /* Collection Cards */
@@ -781,25 +786,88 @@ img {
     filter: invert(1);
 }
 
-/* RESPONSIVE REFINEMENTS FOR DIFFERENT SCREEN TYPES */
+/* RESPONSIVE REFINEMENTS FOR DIFFERENT SCREEN TYPES
+Use Bootstrap breakpoints 576px, 768px, 992px */
+/*  devices 991px */
 
-/* 768px */
-
-@media (max-width: 768px) {
-    .hero-section{
-        min-height: 320px;
+/* Tablet devices >991 */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .footer-custom {
+        text-align: center;
     }
 
-    .collection-card .card-img-top {
-        height: 180px;
+    .footer-col {
+        text-align: center;
     }
-    .table th,
-    .table td {
-        padding: 0.4rem 0.55rem;
+      
+    .footer-brand {
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer-about {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 230px;
+    }
+
+    .footer-social-links {
+        justify-content: center;
+    }
+
+    .footer-list {
+        text-align: center;
     }
 }
 
-/* 400px */
+
+/* Small devices >576px */
+
+@media (max-width: 767.98px) {
+        .footer-custom {
+        text-align: center;
+        font-size: 0.9rem;
+    }
+   
+    .footer-brand {
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        line-height: 1.2;
+    }
+
+    .footer-logo {
+        height: 30px;
+    }
+
+    .footer-about {
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 0.9rem;
+        line-height: 1.5rem;
+    }
+
+    .footer-heading {
+        margin-top: 0.5rem;
+    }
+
+    .footer-icon-link {
+        font-size: 1.15rem;
+    }
+
+    .footer-social-links {
+        justify-content: center;
+    }
+
+    .footer-acknowledgement {
+        font-size: 0.85rem;
+        line-height: 1.45;
+    }
+}
+
+
+/* Extra Small devices 400px */
 
 @media (max-width: 400px) {
     .hero-card {
@@ -808,7 +876,7 @@ img {
         margin-right: 0.75rem;
     }
     .hero-card h1 {
-        font-size: 1.8rem;
+        font-size: 1.65rem;
         line-height: 1.2;
     }
     .hero-card p {
