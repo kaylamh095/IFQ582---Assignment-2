@@ -93,9 +93,17 @@ img {
 
 /*Footer*/
 
+/* Footer */
+/* Footer */
 .footer-custom {
     background-color: var(--colour-espresso);
     font-size: 0.95rem;
+}
+
+.footer-row {
+    max-width: 1120px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .footer-heading {
@@ -109,9 +117,11 @@ img {
     text-decoration: none;
     font-weight: 700;
     font-size: 1.1rem;
+    line-height: 1.25;
 }
 
-.footer-brand:hover {
+.footer-brand:hover,
+.footer-brand:focus {
     color: #FFFFFF;
     text-decoration: none;
 }
@@ -123,7 +133,7 @@ img {
 }
 
 .footer-about {
-    max-width: 620px;
+    max-width: 420px;
     font-size: 0.95rem;
     line-height: 1.6;
     color: var(--colour-parchment);
@@ -140,7 +150,7 @@ img {
 
 .footer-link:hover,
 .footer-link:focus {
-    color:#FFFFFF;
+    color: #FFFFFF;
     text-decoration: underline;
 }
 
@@ -160,12 +170,11 @@ img {
 .footer-icon-link:hover,
 .footer-icon-link:focus {
     color: var(--colour-border);
-
 }
 
 .footer-divider {
     border: 0;
-    border-top: 1px solid #F8F5F1;
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
     margin-top: 2rem;
     margin-bottom: 1.25rem;
 }
@@ -177,6 +186,95 @@ img {
     font-size: 0.9rem;
     line-height: 1.5;
     color: var(--colour-parchment);
+}
+
+/* Footer: 768px to 991px */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .footer-row {
+        max-width: 900px;
+    }
+
+    .footer-col {
+        text-align: center;
+    }
+
+    .footer-brand {
+        justify-content: center;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .footer-logo {
+        margin-right: 0 !important;
+    }
+
+    .footer-about {
+        max-width: 260px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+
+    .footer-social-links {
+        justify-content: center;
+    }
+
+    .footer-list {
+        padding-left: 0;
+    }
+}
+
+/* Footer: mobile */
+@media (max-width: 767.98px) {
+    .footer-custom {
+        text-align: center;
+        font-size: 0.9rem;
+    }
+
+    .footer-row {
+        max-width: 100%;
+    }
+
+    .footer-brand {
+        justify-content: center;
+        flex-direction: column;
+        gap: 0.5rem;
+        line-height: 1.2;
+    }
+
+    .footer-logo {
+        height: 30px;
+        margin-right: 0 !important;
+    }
+
+    .footer-about {
+        max-width: 520px;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+
+    .footer-list {
+        padding-left: 0;
+    }
+
+    .footer-heading {
+        margin-top: 0.5rem;
+    }
+
+    .footer-social-links {
+        justify-content: center;
+    }
+
+    .footer-icon-link {
+        font-size: 1.15rem;
+    }
+
+    .footer-acknowledgement {
+        font-size: 0.85rem;
+        line-height: 1.45;
+    }
 }
 
 /* Buttons */
@@ -788,84 +886,6 @@ img {
 
 /* RESPONSIVE REFINEMENTS FOR DIFFERENT SCREEN TYPES
 Use Bootstrap breakpoints 576px, 768px, 992px */
-/*  devices 991px */
-
-/* Tablet devices >991 */
-@media (min-width: 768px) and (max-width: 991.98px) {
-    .footer-custom {
-        text-align: center;
-    }
-
-    .footer-col {
-        text-align: center;
-    }
-      
-    .footer-brand {
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-    }
-
-    .footer-about {
-        margin-left: auto;
-        margin-right: auto;
-        max-width: 230px;
-    }
-
-    .footer-social-links {
-        justify-content: center;
-    }
-
-    .footer-list {
-        text-align: center;
-    }
-}
-
-
-/* Small devices >576px */
-
-@media (max-width: 767.98px) {
-        .footer-custom {
-        text-align: center;
-        font-size: 0.9rem;
-    }
-   
-    .footer-brand {
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        line-height: 1.2;
-    }
-
-    .footer-logo {
-        height: 30px;
-    }
-
-    .footer-about {
-        margin-left: auto;
-        margin-right: auto;
-        font-size: 0.9rem;
-        line-height: 1.5rem;
-    }
-
-    .footer-heading {
-        margin-top: 0.5rem;
-    }
-
-    .footer-icon-link {
-        font-size: 1.15rem;
-    }
-
-    .footer-social-links {
-        justify-content: center;
-    }
-
-    .footer-acknowledgement {
-        font-size: 0.85rem;
-        line-height: 1.45;
-    }
-}
-
 
 /* Extra Small devices 400px */
 
