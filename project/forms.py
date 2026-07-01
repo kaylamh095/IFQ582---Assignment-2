@@ -8,18 +8,6 @@ from .models.library_staff import LibraryStaff
 from .models.community_elder import CommunityElder
 
 
-class UpdateItemForm(FlaskForm):
-    title = StringField('Title', validators=[InputRequired()])
-    description = TextAreaField('Description', validators=[InputRequired()])
-    image_link = FileField('Add an Image', validators=[FileAllowed(['jpg', 'png'])])
-    item_category = StringField('Category', validators=[InputRequired()])
-    cultural_group = StringField('Cultural Group', validators=[InputRequired()])
-    sensitivity_notes = TextAreaField('Sensitivity Notes', validators=[InputRequired()])
-    review_status = TextAreaField('Review Status', validators=[InputRequired()])
-    access_level = StringField('Access Level', validators=[InputRequired()])
-    submit = SubmitField('Submit')  
-
-
 class LoginForm(FlaskForm):
     """Form for user login."""
     email = StringField("Email", validators = [InputRequired(), email()])
@@ -92,3 +80,32 @@ class RegisterCommunityElderForm(FlaskForm):
             password=self.password.data,
             community_name=self.community_name.data,
         )
+    
+
+# ============= CRUD Forms =============
+
+class UpdateItemForm(FlaskForm):
+    title = StringField('Title', validators=[InputRequired()])
+    description = TextAreaField('Description', validators=[InputRequired()])
+    image_link = FileField('Add an Image', validators=[FileAllowed(['jpg', 'png'])])
+    item_category = StringField('Category', validators=[InputRequired()])
+    cultural_group = StringField('Cultural Group', validators=[InputRequired()])
+    sensitivity_notes = TextAreaField('Sensitivity Notes', validators=[InputRequired()])
+    review_status = TextAreaField('Review Status', validators=[InputRequired()])
+    access_level = StringField('Access Level', validators=[InputRequired()])
+    submit = SubmitField('Submit')  
+
+#class UpdateAccountForm(FlaskForm):
+    #phone = StringField('Phone Number', validators=[InputRequired()])
+    #email = StringField('Email', validators=[InputRequired(), email()])
+    #password = PasswordField('Password', validators=[InputRequired()])
+    #submit = SubmitField('Update')
+    
+class UpdateRoleForm(FlaskForm):
+    user_id = StringField('User ID', validators=[InputRequired()])
+    first_name = StringField('First Name', validators=[InputRequired()])
+    last_name = StringField('Last Name', validators=[InputRequired()])
+    email = StringField('Email', validators=[InputRequired(), email()])
+    role = StringField('Role', validators=[InputRequired()])
+    submit = SubmitField('Update')
+

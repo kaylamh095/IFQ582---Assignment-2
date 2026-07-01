@@ -408,8 +408,45 @@
                         <th scope="col" class="text-end">Manage</th>
                     </tr>
                 </thead>
+<tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.ID }}</td>
+                <td>{{ user.full_name }}</td>
+                <td>{{ user.email }}</td>
+                <td>
+                    {% if user.is_admin == 1 %}
+                        <span class="badge bg-danger">Admin</span>
+                    {% elif user.is_admin == 0 %}
+                        <span class="badge bg-info">Librarian</span>
+                    {% else %}
+                        <span class="badge bg-secondary">No role assigned</span>
+                    {% endif %}
+                </td>
 
-                <tbody>
+                <td>
+                    <form method="POST" action="{{ url_for('admin.admin') }} ">
+                        {{ form.hidden_tag() if form }} 
+                        
+                        <select name="new_role" class="form-select form-select-sm" onchange="this.form.submit()">
+                            <option value="" selected disabled>Choose...</option>
+                            <option value="1">Admin</option>
+                            <option value="0">Librarian</option>
+                            <option value="2">Other</option>
+                        </select>
+                    </form>
+                </td>
+
+                <td class="text-end">
+                    <a href="/admin/edit-user/{{ user.ID }}" class="btn btn-sm btn-outline-primary">Edit</a>
+                    <form method="POST" action="/admin/delete-user/{{ user.ID }}" style="display:inline;">
+                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+
+            <!-- temporary data   <tbody>
                     <tr>
                         <td>USER1</td>
                         <td>Name</td>
@@ -448,7 +485,7 @@
                              Update User Role
                             </a>
                         </td>
-                    </tr>
+                    </tr> -->
                 </tbody>
             </table>
         </div>
