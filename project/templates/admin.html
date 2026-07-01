@@ -14,132 +14,6 @@
         </div>
 </section>
 
-<div class="content-section">
-        <form method="POST" action="">
-        {{ form.hidden_tag() }}
-        <fieldset class="form-group container px-3 md-5 my-5">
-        <legend class="border-bottom mb-4">Add New Item</legend>
-            <!-- Title-->
-            <div class="form-group">
-                {{ form.title.label(class="form-control-label") }}
-                {% if form.title.errors%}
-                {{ form.title(class="form-control form-control-lg is-invalid") }}
-                <div class="invalid-feedback">
-                {% for error in form.title.errors %}
-                <span>{{ error }}</span>
-                {% endfor %}
-                </div>
-                {% else %}
-                {{ form.title(class="form-control form-control-lg") }}
-                {% endif %}
-            </div>
-            <!-- Description-->
-            <div class="form-group">
-                {{ form.description.label(class="form-control-label") }}
-                {% if form.description.errors%}
-                {{ form.description(class="form-control form-control-lg is-invalid") }}
-                <div class="invalid-feedback">
-                {% for error in form.description.errors %}
-                <span>{{ error }}</span>
-                {% endfor %}
-                </div>
-                {% else %}
-                {{ form.description(class="form-control form-control-lg") }}
-                {% endif %}
-            </div> 
-            <!-- Image-->
-            <div class="form-group">
-                {{ form.image_link.label() }}
-                {{ form.image_link(class="form-control-file") }}
-                {% if form.image_link.errors %}
-                <div class="invalid-feedback">
-                {% for error in form.image_link.errors %}
-                <span class="text-danger">{{ error }}</span></br>
-                {% endfor %}
-                </div>
-                {% endif %}
-                </div>
-            <!--Category-->
-            <div class="form-group">
-                {{ form.item_category.label(class="form-control-label") }}
-                {% if form.item_category.errors%}
-                {{ form.item_category(class="form-control form-control-lg is-invalid") }}
-                <div class="invalid-feedback">
-                {% for error in form.item_category.errors %}
-                <span>{{ error }}</span>
-                {% endfor %}
-                </div>
-                {% else %}
-                {{ form.item_category(class="form-control form-control-lg") }}
-                {% endif %}
-            </div>
-            <!--Cultural Group-->
-            <div class="form-group">
-                {{ form.cultural_group.label(class="form-control-label") }}
-                {% if form.cultural_group.errors%}
-                {{ form.cultural_group(class="form-control form-control-lg is-invalid") }}
-                <div class="invalid-feedback">
-                {% for error in form.cultural_group.errors %}
-                <span>{{ error }}</span>
-                {% endfor %}
-                </div>
-                {% else %}
-                {{ form.cultural_group(class="form-control form-control-lg") }}
-                {% endif %}
-            </div>
-            <!-- Sensitivity-->
-            <div class="form-group">
-                {{ form.sensitivity_notes.label(class="form-control-label") }}
-                {% if form.sensitivity_notes.errors%}
-                {{ form.sensitivity_notes(class="form-control form-control-lg is-invalid") }}
-                <div class="invalid-feedback">
-                {% for error in form.sensitivity_notes.errors %}
-                <span>{{ error }}</span>
-                {% endfor %}
-                </div>
-                {% else %}
-                {{ form.sensitivity_notes(class="form-control form-control-lg") }}
-                {% endif %}
-            </div> 
-            <!--Review-->
-            <div class="form-group">
-                {{ form.review_status.label(class="form-control-label") }}
-                {% if form.review_status.errors%}
-                {{ form.review_status(class="form-control form-control-lg is-invalid") }}
-                <div class="invalid-feedback">
-                {% for error in form.review_status.errors %}
-                <span>{{ error }}</span>
-                {% endfor %}
-                </div>
-                {% else %}
-                {{ form.review_status(class="form-control form-control-lg") }}
-                {% endif %}
-            </div>
-            <!--Access-->
-            <div class="form-group">
-                {{ form.access_level.label(class="form-control-label") }}
-                {% if form.access_level.errors%}
-                {{ form.access_level(class="form-control form-control-lg is-invalid") }}
-                <div class="invalid-feedback">
-                {% for error in form.access_level.errors %}
-                <span>{{ error }}</span>
-                {% endfor %}
-                </div>
-                {% else %}
-                {{ form.access_level(class="form-control form-control-lg") }}
-                {% endif %}
-            </div>
-            <!-- Submit Button -->
-                <div class="form-group">
-                {{ form.submit(class="btn btn-primary") }}
-                </div>
-                </fieldset>
-            </form>
-            </div>
-
-
-
-
 <!-- Modify once routes added-->
 
 <section class="container px-3 px-md-5 my-4">
@@ -150,8 +24,13 @@
 
             <div class="card-body">
                 <p class="text-muted">
-                    Edit or delete existing collection items.
+                    Add a new item, edit or delete existing collection items.
                 </p>
+            <div class="d-flex flex-wrap gap-2 mb-4">
+            <a href="{{ url_for('admin.add_item') }}" class="btn btn-primary">
+                Add New Item
+            </a>
+            </div>
 
             <div class="table-responsive">
                 <table class="table align-middle dashboard-table admin-items-table">
@@ -421,8 +300,8 @@
                 </td>
 
                 <td>
-                    <form method="POST" action="{{ url_for('admin.admin') }} ">
-                        {{ form.hidden_tag() if form }} 
+                    <form method="POST" action="{{ url_for('admin.update_user_role', user_id=user.ID) }}">
+                        {{ form.hidden_tag() }} 
                         
                         <select name="new_role" class="form-select form-select-sm" onchange="this.form.submit()">
                             <option value="" selected disabled>Choose...</option>
@@ -441,47 +320,6 @@
                 </td>
             </tr>
             {% endfor %}
-
-            <!-- temporary data   <tbody>
-                    <tr>
-                        <td>USER1</td>
-                        <td>Name</td>
-                        <td>user@example.com</td>
-                        <td>Public User</td>
-                        <td>
-                            <select class="form-select form-select-sm admin-select-role">
-                                <option selected>Public User</option>
-                                <option>Library Staff</option>
-                                <option>Community Elder</option>
-                                <option>Admin</option>
-                            </select>
-                        </td>
-                        <td class="text-end">
-                             <a href="#!" class="btn btn-primary btn-sm admin-update-btn">
-                             Update
-                            </a>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>USER2</td>
-                        <td>Name</td>
-                        <td>user@example.com</td>
-                        <td>Community Elder</td>
-                        <td>
-                            <select class="form-select form-select-sm">
-                                <option>Public User</option>
-                                <option>Library Staff</option>
-                                <option selected>Community Elder</option>
-                                <option>Admin</option>
-                            </select>
-                        </td>
-                        <td class="text-end">
-                             <a href="#!" class="btn btn-primary btn-sm admin-select-role">
-                             Update User Role
-                            </a>
-                        </td>
-                    </tr> -->
                 </tbody>
             </table>
         </div>

@@ -1,0 +1,140 @@
+<!-- templates/add_item.html -->
+{% extends 'base.html' %}
+
+{% block title %}Add New Item{% endblock %}
+
+{% block content %}
+
+<section class="container px-3 md-5 my-5">
+        <div class="admin-page-header mb-4">
+            <h1 class="mb-2">Add New Item</h1>
+            <p class="text-muted mb-0">
+                Complete the form to add a new item to the collection.
+            </p>
+        </div>
+</section>
+
+<div class="content-section">
+        <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group container px-3 md-5 my-5">
+        <legend class="border-bottom mb-4">Add New Item</legend>
+            <!-- Title-->
+            <div class="form-group">
+                {{ form.title.label(class="form-control-label") }}
+                {% if form.title.errors%}
+                {{ form.title(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                {% for error in form.title.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+                </div>
+                {% else %}
+                {{ form.title(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <!-- Description-->
+            <div class="form-group">
+                {{ form.description.label(class="form-control-label") }}
+                {% if form.description.errors%}
+                {{ form.description(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                {% for error in form.description.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+                </div>
+                {% else %}
+                {{ form.description(class="form-control form-control-lg") }}
+                {% endif %}
+            </div> 
+            <!-- Image-->
+            <div class="form-group">
+                {{ form.image_link.label() }}
+                {{ form.image_link(class="form-control-file") }}
+                {% if form.image_link.errors %}
+                <div class="invalid-feedback">
+                {% for error in form.image_link.errors %}
+                <span class="text-danger">{{ error }}</span></br>
+                {% endfor %}
+                </div>
+                {% endif %}
+                </div>
+            <!--Category-->
+            <div class="form-group">
+                {{ form.item_category.label(class="form-control-label") }}
+                {% if form.item_category.errors%}
+                {{ form.item_category(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                {% for error in form.item_category.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+                </div>
+                {% else %}
+                {{ form.item_category(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <!--Cultural Group-->
+            <div class="form-group">
+                {{ form.cultural_group.label(class="form-control-label") }}
+                {% if form.cultural_group.errors%}
+                {{ form.cultural_group(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                {% for error in form.cultural_group.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+                </div>
+                {% else %}
+                {{ form.cultural_group(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <!-- Sensitivity-->
+            <div class="form-group">
+                {{ form.sensitivity_notes.label(class="form-control-label") }}
+                {% if form.sensitivity_notes.errors%}
+                {{ form.sensitivity_notes(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                {% for error in form.sensitivity_notes.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+                </div>
+                {% else %}
+                {{ form.sensitivity_notes(class="form-control form-control-lg") }}
+                {% endif %}
+            </div> 
+            <!--Review-->
+            <div class="form-group">
+                {{ form.review_status.label(class="form-control-label") }}
+                {% if form.review_status.errors%}
+                {{ form.review_status(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                {% for error in form.review_status.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+                </div>
+                {% else %}
+                {{ form.review_status(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <!--Access-->
+            <div class="form-group">
+                {{ form.access_level.label(class="form-control-label") }}
+                {% if form.access_level.errors%}
+                {{ form.access_level(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                {% for error in form.access_level.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+                </div>
+                {% else %}
+                {{ form.access_level(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <!-- Submit Button -->
+                <div class="form-group">
+                {{ form.submit(class="btn btn-primary") }}
+                </div>
+                </fieldset>
+            </form>
+            </div>
+
+{% endblock %}
