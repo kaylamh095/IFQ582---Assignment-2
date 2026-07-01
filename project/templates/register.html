@@ -1,14 +1,15 @@
 {% extends 'base.html' %}
 {% import 'bootstrap5/form.html' as wtf %}
 {% block content %}
-<section class="shadow-sm mb-5 mt-5">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <h1>Public User Registration</h1>
+<section class="container px-3 px-md-5 my-5">
+        <div class="user-register-header mb-4">
+                <h1 class=mb-2">Public User Registration</h1>
+                <p class="text-muted mb-0">
+                Complete the form to register for an account.
+                 </p>
             </div>
-        </div>
-        <div class="row mt-4 justify-content-center p-3">
+
+        <div class="row justify-content-center">
             <div class="col-md-6">{{ wtf.render_form(form) }}</div>
             <small class="text-muted row mt-4 justify-content-center"> Already have an account?
                 <a class="row mt-4 justify-content-center" href="{{ url_for('login.login') }}">

@@ -528,7 +528,8 @@ img {
 .assessment-dashboard-header h1,
 .admin-page-header h1,
 .staff-page-header h1,
-.user-login h1,
+.user-login-header h1,
+.user-register-header h1,
 .account-page-header h1  {
     border-left: 5px solid var(--colour-espresso);
     padding-left: 1rem;
@@ -542,6 +543,7 @@ img {
 .admin-page-header h1,
 .staff-page-header h1,
 .user-login-header h1,
+.user-register-header h1,
 .account-page-header h1 {
     color: var(--colour-espresso);
     font-weight: 600;
@@ -554,6 +556,7 @@ img {
 .admin-page-header p,
 .staff-page-header p,
 .user-login-header p,
+.user-register-header p,
 .account-page-header p {
     color: var(--colour-text-muted);
     max-width: 760px;
