@@ -43,25 +43,3 @@ def logout():
     session.clear()
     return redirect(url_for("login.login"))
 
-
-# @bp.route("/login", methods=['GET', 'POST'])
-# def login():
-#    if current_user.is_authenticated:
-#        return redirect(url_for('main.home'))
-#    form = LoginForm()
-#    if form.validate_on_submit():
-#        cur = mysql.connection.cursor()
-#        cur.execute("SELECT * FROM user WHERE email = %s", (form.email.data,))
-#        row = cur.fetchone()
-#        cur.close()
-
-#        if row:
-#           if row['password'] == hashed_input:
-#                user = User(**row)
-#                login_user(user, remember=form.remember.data)
-#               flash('You have been logged in!', 'success')
-#                next_page = request.args.get('next')
-#                return redirect(next_page) if next_page else redirect(url_for('main.home'))
-#        else:
-#            flash('Login Unsuccessful. Please check email and password', 'danger')
-#    return render_template('login.html', title='Login', form=form)

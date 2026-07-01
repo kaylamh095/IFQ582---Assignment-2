@@ -223,11 +223,20 @@
 
             </tbody>
                 <tr>
+                    {% for request in AccessRequests %}
+                        <tr>
+                            <td>{{request.request_id}}</td>
+                            <td>{{request.item_ID}}</td>
+                            <td>{{request.user_ID}}</td>
+                            <td>{{request.request_date}}</td>
+                            <td>
+                    {% endfor %}
+                    <!--
                     <td>Request12</td>
                     <td>Title</td>
                     <td>Name</td>
                     <td>Reason</td>
-                    <td>
+                    <td> -->
                         <span class="badge text-bg-warning">Pending</span>
                     </td>
                     <td class="text-center">

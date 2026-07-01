@@ -95,11 +95,11 @@ class UpdateItemForm(FlaskForm):
     access_level = StringField('Access Level', validators=[InputRequired()])
     submit = SubmitField('Submit')  
 
-#class UpdateAccountForm(FlaskForm):
-    #phone = StringField('Phone Number', validators=[InputRequired()])
-    #email = StringField('Email', validators=[InputRequired(), email()])
-    #password = PasswordField('Password', validators=[InputRequired()])
-    #submit = SubmitField('Update')
+class UpdateAccountForm(FlaskForm):
+    phone = StringField('Phone Number', validators=[InputRequired()])
+    email = StringField('Email', validators=[InputRequired(), email()])
+    password = PasswordField('Password', validators=[InputRequired()])
+    submit = SubmitField('Update')
     
 class UpdateRoleForm(FlaskForm):
     user_id = StringField('User ID', validators=[InputRequired()])
@@ -109,3 +109,10 @@ class UpdateRoleForm(FlaskForm):
     role = StringField('Role', validators=[InputRequired()])
     submit = SubmitField('Update')
 
+class UpdateAccessRequestForm(FlaskForm):
+    request_id = StringField('Request ID', validators=[InputRequired()])
+    user_id = StringField('User ID', validators=[InputRequired()])
+    item_id = StringField('Item ID', validators=[InputRequired()])
+    request_date = StringField('Request Date', validators=[InputRequired()])
+    status = StringField('Status', validators=[InputRequired()])
+    submit = SubmitField('Update')
