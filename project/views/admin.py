@@ -18,7 +18,7 @@ def admin_dashboard():
     form = UpdateItemForm()
     db_items = get_collection_items()
     db_users = get_user_role()
-    return render_template('admin.html', title='Admin', form=form, requests=get_access_requests(), users=db_users, items=db_items)
+    return render_template('admin.html', title='Admin', form=form, users=get_user_role(), items=get_collection_items(), requests=get_access_requests())
 
 @bp.route('/admin/add_item', methods=['GET', 'POST'])
 def add_item():
@@ -29,8 +29,8 @@ def add_item():
         mysql.connection.commit()
         cur.close()
         flash('Item added successfully!', 'success')
-        return redirect(url_for('admin.admin'))
-    return render_template('admin.html', title='Admin', form=form, users=get_user_role(), items=get_collection_items(), requests=get_access_requests())
+        return redirect(url_for('admin.admin_dashboard'))
+    return render_template('add_item.html', title='Add New Item', form=form)
 
 
 @bp.route('/admin/update_role/<int:user_id>', methods=['POST'])
@@ -59,7 +59,7 @@ def manage_item(item_id):
     elif action == 'update':
         # need to figure this out
         flash('Update functionality not implemented yet.', 'info')
-    return redirect(url_for('admin.manage_collection_page'))
+    return redirect(url_for('admin.admin_dashboard'))
 
 
 
