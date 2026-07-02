@@ -64,3 +64,17 @@ def only_elders(func):
             return redirect(url_for('main.index'))
         return func(*args, **kwargs)
     return wrapper
+
+
+def admins_and_elders(func):
+    """Decorator to ensure that the user is either an admin or a community elder."""
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        if 'user' not in session:
+            flash('Please log in before moving on.', 'error')
+            return redirect(url_for('login.login'))
+        if not session['user']['is_elder'] or session['user']['is_admin']:
+            flash('You do not have permission to view this page.', 'error')
+            return redirect(url_for('main.index'))
+        return func(*args, **kwargs)
+    return wrapper
