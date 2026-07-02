@@ -2,13 +2,15 @@
 from flask import Blueprint, render_template, flash, request, url_for, redirect, session, app
 from project.db import user
 from project.db.admin_db import get_access_requests, get_collection_items, get_user_role, get_item_by_id
-from project.forms import UpdateAccountForm, UpdateItemForm, UpdateRoleForm
+from project.forms import RegisterLibraryStaffForm, RegisterPublicForm, UpdateAccountForm, UpdateItemForm, UpdateRoleForm
 from wtforms import form
 from project.db.admin_db import get_collection_items, get_user_role
+from project.db.user import add_public_user, add_library_staff, add_community_elder, email_exists
 from project.forms import UpdateItemForm, UpdateRoleForm
 from project.models.user import User
 from ..db.setup import mysql
 from ..wrappers import login_required, only_admins, only_staff
+from hashlib import sha256
 
 bp = Blueprint('admin', __name__)
 
@@ -64,6 +66,7 @@ def edit_item(item_id):
     form = UpdateItemForm(data=item)
     return render_template('edit_item.html', title='Edit Item', form=form, item=item)
 
+#===============Access Request Management ================
 
 @bp.route('/admin/manage_access_requests', methods=['GET', 'POST'])
 @login_required
@@ -82,6 +85,7 @@ def manage_access_requests():
             flash('Invalid request ID or status.', 'error')
     return render_template('admin_manage_access_requests.html', requests=get_access_requests(), title='Manage Access Requests')
 
+#===============User Role Management ================
 
 @bp.route('/admin/update_role/<int:user_id>', methods=['GET', 'POST'])
 @login_required
@@ -104,6 +108,45 @@ def update_user_role(user_id):
         flash('User deleted successfully!', 'success')
     
     return redirect(url_for('admin.admin_dashboard'))
+
+@bp.route('/admin/add_new_public_user', methods=['POST'])
+@login_required
+@only_staff
+def add_new_public_user():
+    form = RegisterPublicForm()
+    if form.validate_on_submit():
+        assert form.password.data, "Password is required"
+        form.password.data = sha256(form.password.data.encode()).hexdigest() 
+        if not email_exists(form.email.data):
+            if add_public_user(form):
+                flash('Public user added successfully!', 'success')
+        else:
+            flash('A user with that email already exists.', 'error')
+            return redirect(url_for('admin.admin_dashboard'))
+    else:
+        flash('Please fill in all required fields.', 'error')
+    return redirect(url_for('admin.admin_dashboard'))
+
+
+@bp.route('/admin/add_new_library_staff', methods=['POST'])
+@login_required
+@only_admins
+def add_new_library_staff():
+    form = RegisterLibraryStaffForm()
+    if form.validate_on_submit():
+        assert form.password.data, "Password is required"
+        form.password.data = sha256(form.password.data.encode()).hexdigest() 
+        if not email_exists(form.email.data):
+            if add_library_staff(form):
+                flash('Library staff user added successfully!', 'success')
+            else:
+                flash('A user with that email already exists.', 'error')
+                return redirect(url_for('admin.add_new_library_staff'))
+        flash('Library staff user added successfully!', 'success')
+    else:
+        flash('Please fill in all required fields.', 'error')
+    return redirect(url_for('admin.admin_dashboard'))
+
 
 
 # ================Account Page ================
