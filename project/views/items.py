@@ -1,7 +1,8 @@
 ### items.py
 ### import flask and template for error handling
-from flask import Flask,  render_template, Blueprint, request
-from ..db.connection import cursor, connection
+from flask import Flask, redirect,  render_template, Blueprint, request, url_for
+from project.db.items_db import get_all_items_from_db, get_one_item_from_db
+#from ..db.connection import cursor, connection
 from ..models.collitem import CollItem
 
 bp = Blueprint('items', __name__)
@@ -9,14 +10,23 @@ bp = Blueprint('items', __name__)
 ### /item route to display all items in the collection_items table in the CollItem class
 @bp.route('/items')
 def items():
-    cur = cursor() ### open a cursor to the db
-    cur.execute("SELECT item_id, title, description, image_link, item_category, cultural_group, sensitivity_notes, review_status, access_level FROM collection_items") ### run the query
-    results = cur.fetchall() ### get all query results
-    cur.close() ### close the cursor
-    itemsall = [CollItem(item_id=str(row['item_id']), title=row['title'], description=row['description'], image_link=row['image_link'], item_category=row['item_category'], cultural_group=row['cultural_group'], sensitivity_notes=row['sensitivity_notes'], review_status=row['review_status'], access_level=row['access_level']) for row in results]  ### create a list of CollItem objects with the results
+#    cur = cursor() ### open a cursor to the db
+#    cur.execute("SELECT item_id, title, description, image_link, item_category, cultural_group, sensitivity_notes, review_status, access_level FROM collection_items") ### run the query
+#    results = cur.fetchall() ### get all query results
+#    cur.close() ### close the cursor
+#    itemsall = [CollItem(item_id=str(row['item_id']), title=row['title'], description=row['description'], image_link=row['image_link'], item_category=row['item_category'], cultural_group=row['cultural_group'], sensitivity_notes=row['sensitivity_notes'], review_status=row['review_status'], access_level=row['access_level']) for row in results]  ### create a list of CollItem objects with the results
+    itemsall = get_all_items_from_db() ### call the function to get all items from the db
     return render_template('items.html', items=itemsall) ### pass the data to the item template to display # items= needs to match the jinja2 in items statement in items.html
 
 
+###  not resolving yet, it's going back to /items
+@bp.route('/items/<int:item_id>')
+def get_item(item_id):
+    one_item = get_one_item_from_db(item_id) ### call the function to get one item from the db
+    ###return render_template('items.html', item=one_item, item_id=item_id) ### pass the data to the item template to display # item= needs to match the jinja x in item statement in item.html  
+    #return render_template('items.html', item=get_one_item_from_db(item_id)) ### pass the data to the item template to display # item= needs to match the jinja x in item statement in item.html  
+    return redirect(url_for('items.items'))  ### redirect to the items page if item_id is not found
+    
 
 #### /item route to display all items in the collection_items table in the CollItem class
 #@bp.route('/item/<int:item_id>')
