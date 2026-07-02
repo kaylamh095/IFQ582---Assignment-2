@@ -24,7 +24,7 @@ def get_user_role():
 
 def get_collection_items():
     cur = mysql.connection.cursor()
-    cur.execute("SELECT item_id, title, description, image_link, item_category, review_status, access_level, sensitivity_notes FROM collection_items")
+    cur.execute("SELECT item_id, title, description, image_link, item_category, cultural_group, review_status, access_level, sensitivity_notes FROM collection_items")
     items = cur.fetchall()
     cur.close()
     return [CollectionItem(
@@ -33,10 +33,19 @@ def get_collection_items():
         description=row['description'],
         image_link=row['image_link'],
         item_category=row['item_category'],
+        cultural_group=row['cultural_group'],
         review_status=row['review_status'],
         access_level=row['access_level'], 
         sensitivity_notes=row['sensitivity_notes']
     ) for row in items]  
+
+def get_item_by_id(item_id):
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT item_id, title, description, image_link, item_category, cultural_group, review_status, access_level, sensitivity_notes FROM collection_items WHERE item_id = %s", (item_id,))
+    row = cur.fetchone()
+    cur.close()
+    return row
+    
     
 def get_access_requests():
     cur = mysql.connection.cursor()

@@ -1,0 +1,182 @@
+<!-- templates/add_item.html -->
+{% extends 'base.html' %}
+
+{% block title %}Edit Item{% endblock %}
+
+{% block content %}
+
+<section class="container px-3 px-md-5 my-5">
+        <div class="admin-page-header mb-4">
+            <h1 class="mb-2">Edit Item</h1>
+            <p class="text-muted mb-0">
+                Update the details of the item below.
+            </p>
+        </div>
+
+<div class="content-section">
+<div class="card admin-card">
+    <div class="card-header">
+        Edit Collection Item
+    </div>
+    
+    <div class="card-body">
+        <form method="POST" action="{{ url_for('admin.manage_item', item_id=item.item_id) }}" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <input type="hidden" name="action" value="update"
+        <fieldset>
+        <legend class="h5 mb-4">Item Details</legend>
+            <!-- Title-->
+            <div class="mb-3">
+                {{ form.title.label(class="form-control-label") }}
+                {% if form.title.errors%}
+                {{ form.title(class="form-control is-invalid") }}
+                <div class="invalid-feedback">
+                {% for error in form.title.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+                </div>
+                {% else %}
+                {{ form.title(class="form-control") }}
+                {% endif %}
+            </div>
+            <!-- Description-->
+            <div class="mb-3">
+                {{ form.description.label(class="form-control-label") }}
+                {% if form.description.errors%}
+                {{ form.description(class="form-control is-invalid") }}
+                <div class="invalid-feedback">
+                {% for error in form.description.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+                </div>
+                {% else %}
+                {{ form.description(class="form-control") }}
+                {% endif %}
+            </div> 
+            <!-- Image-->
+            <div class="mb-3">
+                {{ form.image_link.label() }}
+                {% if item.image_link %}
+                <p class="text-muted small mb-1">Current: {{ item.image_link }}</p>
+                {% endif %}
+                {{ form.image_link(class="form-control-file") }}
+                </div>
+            <!--Category-->
+            <div class="mb-3">
+                {{ form.item_category.label(class="form-control-label") }}
+                <select class="form-select {% if form.item_category.errors %}is-invalid{% endif %}"
+                name="item_category"
+                id="item_category"
+                required>
+                <option value="">Select Category</option>
+                <option value="cultural artefact records" {% if form.item_category.data == 'cultural artefact records' %}selected{% endif %}>
+                Cultural Artefact Records
+                </option>
+                <option value="historical photographs" {% if form.item_category.data == 'historical photographs' %}selected{% endif %}>
+                Historical Photographs
+                </option>
+                <option value="audio recordings of oral histories" {% if form.item_category.data == 'audio recordings of oral histories' %}selected{% endif %}>
+                Audio Recordings of Oral Histories
+                </option>
+                <option value="archival manuscripts or documents" {% if form.item_category.data == 'archival manuscripts or documents' %}selected{% endif %}>
+                Archival Manuscripts or Documents
+                </option>
+                <option value="artwork created by indigenous artists" {% if form.item_category.data == 'artwork created by indigenous artists' %}selected{% endif %}>
+                Artwork Created by Indigenous Artists
+                </option>
+                <option value="language preservation materials" {% if form.item_category.data == 'language preservation materials' %}selected{% endif %}>
+                Language Preservation Materials
+                </option>
+            </select>
+                {% if form.item_category.errors %}
+                <div class="invalid-feedback">
+                {% for error in form.item_category.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+                </div>
+                {% else %}
+                <!-- {{ form.item_category(class="form-control form-control-lg") }} -->
+                {% endif %}
+            </div>
+            <!--Cultural Group-->
+            <div class="mb-3">
+                {{ form.cultural_group.label(class="form-control-label") }}
+                {% if form.cultural_group.errors%}
+                {{ form.cultural_group(class="form-control is-invalid") }}
+                <div class="invalid-feedback">
+                {% for error in form.cultural_group.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+                </div>
+                {% else %}
+                {{ form.cultural_group(class="form-control") }}
+                {% endif %}
+            </div>
+            <!-- Sensitivity-->
+            <div class="mb-3">
+                {{ form.sensitivity_notes.label(class="form-control-label") }}
+                {% if form.sensitivity_notes.errors%}
+                {{ form.sensitivity_notes(class="form-control is-invalid") }}
+                <div class="invalid-feedback">
+                {% for error in form.sensitivity_notes.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+                </div>
+                {% else %}
+                {{ form.sensitivity_notes(class="form-control") }}
+                {% endif %}
+            </div> 
+            <!--Review-->
+            <div class="mb-3">
+                {{ form.review_status.label(class="form-control-label") }}
+                <select class="form-select {% if form.review_status.errors %}is-invalid{% endif %}"
+                name="review_status"
+                id="review_status"
+                required>
+                <option value="">Select Review Status</option>
+                <option value="Pending" {% if form.review_status.data == 'Pending' %}selected{% endif %}>Pending</option>
+                <option value="Under Review" {% if form.review_status.data == 'Under Review' %}selected{% endif %}>Under Review</option>
+                <option value="Completed" {% if form.review_status.data == 'Completed' %}selected{% endif %}>Completed</option>
+                </select>
+                {% if form.review_status.errors%}
+                {{ form.review_status(class="form-control is-invalid") }}
+                <div class="invalid-feedback">
+                {% for error in form.review_status.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+                </div>
+                {% else %}
+                <!-- 
+                {{ form.review_status(class="form-control form-control-lg") }} -->
+                {% endif %}
+            </div>
+            <!--Access-->
+            <div class="mb-3">
+                {{ form.access_level.label(class="form-control-label") }}
+                <select class="form-select {% if form.access_level.errors %}is-invalid{% endif %}"
+                name="access_level"
+                id="access_level"
+                required>
+                <option value="">Select Access Level</option>
+                <option value="Public" {% if form.review_status.data == 'Public' %}selected{% endif %}>Public</option>
+                <option value="Private" {% if form.review_status.data == 'Private' %}selected{% endif %}>Private</option>
+                <option value="Restricted" {% if form.review_status.data == 'Restricted' %}selected{% endif %}>Restricted</option>
+                </select>
+                {% if form.access_level.errors%}
+                <!--{{ form.access_level(class="form-control form-control-lg is-invalid") }}-->
+                <div class="invalid-feedback">
+                {% for error in form.access_level.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+            <!-- Submit Button -->
+                <div class="d-flex justify-content-end gap-2 mt-4">
+                {{ form.submit(class="btn btn-primary") }}
+                </div>
+                </fieldset>
+            </form>
+            </div>
+</section>
+{% endblock %}

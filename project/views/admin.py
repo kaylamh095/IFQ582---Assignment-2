@@ -1,7 +1,7 @@
 ### import flask and blueprint / route template
 from flask import Blueprint, render_template, flash, request, url_for, redirect, session, app
 from project.db import user
-from project.db.admin_db import get_access_requests, get_collection_items, get_user_role
+from project.db.admin_db import get_access_requests, get_collection_items, get_user_role, get_item_by_id
 from project.forms import UpdateAccountForm, UpdateItemForm, UpdateRoleForm
 from wtforms import form
 from project.db.admin_db import get_collection_items, get_user_role
@@ -37,6 +37,52 @@ def add_item():
     return render_template('add_item.html', title='Add New Item', form=form)
 
 
+@bp.route('/admin/manage_item/<int:item_id>', methods=['POST'])
+@login_required
+@only_admins
+def manage_item(item_id):
+    action = request.form.get('action')
+    if action == 'delete':
+        cur = mysql.connection.cursor()
+        cur.execute("DELETE FROM collection_items WHERE item_id = %s", (item_id,))
+        mysql.connection.commit()
+        cur.close()
+        flash('Item deleted successfully!', 'success')
+    elif action == 'update':
+        cur = mysql.connection.cursor()
+        cur.execute("UPDATE collection_items SET title = %s, description = %s, image_link = %s, item_category = %s, cultural_group = %s, sensitivity_notes = %s, review_status = %s, access_level = %s WHERE item_id = %s", (request.form.get('title'), request.form.get('description'), request.form.get('image_link'), request.form.get('item_category'), request.form.get('cultural_group'), request.form.get('sensitivity_notes'), request.form.get('review_status'), request.form.get('access_level'), item_id))
+        mysql.connection.commit()
+        cur.close()
+        flash('Item updated successfully!', 'success')
+    return redirect(url_for('admin.admin_dashboard'))
+
+@bp.route('/admin/edit_item/<int:item_id>', methods=['GET'])
+@login_required
+@only_staff
+def edit_item(item_id):
+    item = get_item_by_id(item_id)
+    form = UpdateItemForm(data=item)
+    return render_template('edit_item.html', title='Edit Item', form=form, item=item)
+
+
+@bp.route('/admin/manage_access_requests', methods=['GET', 'POST'])
+@login_required
+@only_admins
+def manage_access_requests():
+    if request.method == 'POST':
+        request_id = request.form.get('request_id')
+        new_status = request.form.get('new_status')
+        if request_id and new_status:
+            cur = mysql.connection.cursor()
+            cur.execute("UPDATE access_request SET request_status = %s WHERE request_id = %s", (new_status, request_id))
+            mysql.connection.commit()
+            cur.close()
+            flash('Access request status updated successfully!', 'success')
+        else:
+            flash('Invalid request ID or status.', 'error')
+    return render_template('admin_manage_access_requests.html', requests=get_access_requests(), title='Manage Access Requests')
+
+
 @bp.route('/admin/update_role/<int:user_id>', methods=['GET', 'POST'])
 @login_required
 @only_admins
@@ -58,44 +104,6 @@ def update_user_role(user_id):
         flash('User deleted successfully!', 'success')
     
     return redirect(url_for('admin.admin_dashboard'))
-
-
-@bp.route('/admin/manage_item/<int:item_id>', methods=['POST'])
-@login_required
-@only_admins
-def manage_item(item_id):
-    action = request.form.get('action')
-    if action == 'delete':
-        cur = mysql.connection.cursor()
-        cur.execute("DELETE FROM collection_items WHERE item_id = %s", (item_id,))
-        mysql.connection.commit()
-        cur.close()
-        flash('Item deleted successfully!', 'success')
-    elif action == 'update':
-        # need to figure this out
-        flash('Update functionality not implemented yet.', 'info')
-    return redirect(url_for('admin.admin_dashboard'))
-
-
-
-
-@bp.route('/admin/manage_access_requests', methods=['GET', 'POST'])
-@login_required
-@only_admins
-def manage_access_requests():
-    if request.method == 'POST':
-        request_id = request.form.get('request_id')
-        new_status = request.form.get('new_status')
-        if request_id and new_status:
-            cur = mysql.connection.cursor()
-            cur.execute("UPDATE access_request SET request_status = %s WHERE request_id = %s", (new_status, request_id))
-            mysql.connection.commit()
-            cur.close()
-            flash('Access request status updated successfully!', 'success')
-        else:
-            flash('Invalid request ID or status.', 'error')
-    return render_template('admin_manage_access_requests.html', requests=get_access_requests(), title='Manage Access Requests')
-
 
 
 # ================Account Page ================
