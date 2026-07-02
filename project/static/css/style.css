@@ -1,5 +1,6 @@
 /* CSS Variables
-Used to define colour palette sitewide. Simplifies and allows colours to be used consistently.
+Used to define colour palette sitewide. 
+Simplifies and allows colours to be used consistently throughout.
 */
 :root {
 --colour-espresso: #2B1A14;
@@ -446,6 +447,24 @@ border: none;
 border-radius: 10px;
 box-shadow: 0 4px 16px #2B1A1426;
 margin-bottom: 0.75rem;
+animation: flashFadeOut 3s forwards;
+}
+
+@keyframes flashFadeOut {
+0% {
+opacity: 1;
+visibility: visible;
+}
+
+50% {
+opacity: 1;
+visibility: visible;
+}
+
+100% {
+opacity: 0;
+visibility: hidden;
+}
 }
 
 .flash-message.alert-success {
