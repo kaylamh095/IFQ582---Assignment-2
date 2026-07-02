@@ -342,8 +342,7 @@ img {
 /* Badges for status*/
 .badge-approved,
 .badge-public,
-.badge-success, 
-.badge-completed {
+.badge-success {
     background-color: var(--colour-success-soft);
     color: var(--colour-success);
 }
@@ -363,7 +362,8 @@ img {
     color: var(--colour-danger);
 }
 
-.badge-private {
+.badge-private, 
+.badge-completed {
     background-color: var(--colour-parchment);
     color: var(--colour-espresso);
 }
