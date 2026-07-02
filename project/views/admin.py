@@ -68,22 +68,43 @@ def edit_item(item_id):
 
 #===============Access Request Management ================
 
-@bp.route('/admin/manage_access_requests', methods=['GET', 'POST'])
+#@bp.route('/admin/manage_access_requests', methods=['GET', 'POST'])
+#@login_required
+#@only_admins
+#def manage_access_requests():
+#    if request.method == 'POST':
+#        request_id = request.form.get('request_id')
+#        new_status = request.form.get('new_status')
+#        if request_id and new_status:
+#            cur = mysql.connection.cursor()
+#            cur.execute("UPDATE access_request SET request_status = %s WHERE request_id = %s", (new_status, request_id))
+#            mysql.connection.commit()
+#            cur.close()
+#            flash('Access request status updated successfully!', 'success')
+#        else:
+#            flash('Invalid request ID or status.', 'error')
+#    return render_template('admin_manage_access_requests.html', requests=get_access_requests(), title='Manage Access Requests')
+
+@bp.route('/admin/update_access_request/<int:request_id>', methods=['GET', 'POST'])
 @login_required
 @only_admins
-def manage_access_requests():
-    if request.method == 'POST':
-        request_id = request.form.get('request_id')
-        new_status = request.form.get('new_status')
-        if request_id and new_status:
-            cur = mysql.connection.cursor()
-            cur.execute("UPDATE access_request SET request_status = %s WHERE request_id = %s", (new_status, request_id))
-            mysql.connection.commit()
-            cur.close()
-            flash('Access request status updated successfully!', 'success')
-        else:
-            flash('Invalid request ID or status.', 'error')
-    return render_template('admin_manage_access_requests.html', requests=get_access_requests(), title='Manage Access Requests')
+def update_access_request(request_id):
+    new_status = request.form.get('new_status')
+    if new_status:
+        cur = mysql.connection.cursor()
+        cur.execute("UPDATE access_request SET request_status = %s WHERE request_id = %s", (new_status, request_id))
+        mysql.connection.commit()
+        cur.close()
+        flash('Access request status updated successfully!', 'success')
+    else:
+        flash('Invalid status.', 'error')
+    return redirect(url_for('admin.admin_dashboard', request_id=request_id))
+
+@bp.route('/admin/view_access_request/<int:request_id>', methods=['GET'])
+@login_required 
+@only_admins
+def view_access_request(request_id):
+    return render_template('admin_view_access_request.html', request=get_access_requests(request_id), title='View Access Request')
 
 #===============User Role Management ================
 

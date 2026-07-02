@@ -118,11 +118,13 @@
                                 <span class="badge text-bg-warning">{{ request.request_status }}</span>
                             </td>
                             <td class="text-center">
+                            <form method="POST" action="{{ url_for('admin.update_access_request', request_id=request.request_id) }}">
+                                {{ form.hidden_tag() }}
                                 <div class="d-flex justify-content-center gap-2">
-                                    <a href="#!" class="btn btn-primary btn-sm">View</a>
-                                    <a href="#!" class="btn btn-success btn-sm">Approve</a>
-                                    <a href="#!" class="btn btn-danger btn-sm">Decline</a>
-                                </div>
+                                            <a href="{{ url_for('admin.view_access_request', request_id=request.request_id) }}" class="btn btn-primary btn-sm">View</a>
+                                            <button type="submit" name="new_status" value="approved" class="btn btn-success btn-sm">Approve</button>
+                                            <button type="submit" name="new_status" value="declined" class="btn btn-danger btn-sm">Decline</button>
+                                </select>
                             </td>
                         </tr>
                         {% endfor %}
