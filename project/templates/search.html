@@ -20,13 +20,14 @@
     <div class="card-body">
 
 <!--Connect Filter controls (collection_items)-->
-<form action="/searchresults" method="POST">
+<form action="/search" method="POST">
   <div class="mb-3">
         <label for="searchKeyword">Search:</label>
         <input type="text"
         class="form-control"
         id="searchKeyword"
-        name="search_term"
+        name="search_query"
+        value="{{ search_query }}"
         placeholder="Search by title, category, cultural group, access level or keyword">
       </div>
 
@@ -68,4 +69,43 @@
 </section>
 
 
+
+
+<!--Search results-->
+<section class="container my-5" id="collection">
+  <div class="row justify-content-center">
+  <div class="col-lg-10">
+
+  <div class="card searchresults-card">
+    <div class="card-header">
+      {{ title }}
+    </div>
+    <div class="card-body">
+
+    <p>Search results for: <strong>{{ search_query }}</strong></p>
+    <p>Category filter: <strong>{{ filter_category }}</strong></p>
+    <p>Access level filter: <strong>{{ filter_access }}</strong></p>
+    
+
+</div>
+</div>
+</div>
+</div>
+</section>
+
+
+<!-- Results underneath -->
+{% if results %}
+    {% for item in results %}
+        <p>{{ item.title }}</p>
+        <p>{{ item.description }}</p></br>
+    {% endfor %}
+{% elif search_query %}
+    <p>No results found for "{{ search_query }}"</p>
+{% endif %}
+
+
+
 {% endblock %}
+
+
