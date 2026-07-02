@@ -1,6 +1,7 @@
 ### import flask and template for error handling
 from flask import Flask, app,  render_template
 from flask_login import LoginManager
+from .drafts import kath, scratch
 from project.models.user import User
 from .views import items, register
 from .db.setup import set_up_database
@@ -23,13 +24,11 @@ def create_app():
   set_up_database(app)
 
  ### register the blueprint routes for views - to create the routes for the web app
-  from .views import main, library, login, register, scratch, admin, kath, search, items
+  from .views import main, library, login, register, admin, search, items
   app.register_blueprint(main.bp)
   app.register_blueprint(library.bp)
   app.register_blueprint(login.bp)
   app.register_blueprint(register.bp)
-  app.register_blueprint(scratch.bp)
-  app.register_blueprint(kath.bp)
   app.register_blueprint(items.bp)
   app.register_blueprint(admin.bp, url_prefix='/admin')
   app.register_blueprint(search.bp)
