@@ -1,197 +1,47 @@
-<!-- templates/assessment-dashboard.html -->
+<!-- templates/dashboard.html -->
 {% extends 'base.html' %}
 
 {% block title %}Assessment Dashboard{% endblock %}
 
 {% block content %}
-
 <section class="container px-3 px-md-5 my-5">
-    <div class="assessment-dashboard-header mb-4">
-        <h1 class="mb-2">Assessment Dashboard</h1>
-        <p>
-            Review collection items pending assessment.
-        </p>
-    </div>
+  <div class="assessment-page-header mb-4">
+    <h1 class="mb-2">Assessment Dashboard</h1>
+    <p>Select a collection item to preview, review, and approve.</p>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-bordered align-middle">
+      <thead>
+        <tr>
+          <th>Item ID</th>
+          <th>Title</th>
+          <th>Category</th>
+          <th>Cultural Group</th>
+          <th>Review Status</th>
+          <th>Access Level</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in items %}
+          <tr>
+            <td>{{ item.item_ID }}</td>
+            <td>{{ item.title }}</td>
+            <td>{{ item.item_category }}</td>
+            <td>{{ item.cultural_group }}</td>
+            <td><span class="badge bg-secondary">{{ item.review_status }}</span></td>
+            <td><span class="badge bg-info text-dark">{{ item.access_level }}</span></td>
+            <td>
+              <a href= 
+{{ url_for('library.assessment', item_id=item.item_ID)}} class="btn btn-sm btn-outline-dark">
+                Open
+              </a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 </section>
-
-<section class="container px-3 px-md-5 my-4">
-    <div class="row">
-
-    <div class="col-md-3 mb-4">
-    <div class="card dashboard-summary-card h-100">
-    <div class="card-body">
-        <p class="dashboard-summary-label mb-1">Pending Review</p>
-        <h2 class="dashboard-summary-number mb-0">4</h2>
-    </div>
-</div>
-</div>
-
-<div class="col-md-3 mb-4">
-<div class="card dashboard-summary-card h-100">
-    <div class="card-body">
-        <p class="dashboard-summary-label mb-1">Approved</p>
-        <h2 class="dashboard-summary-number mb-0">5</h2>
-    </div>
-</div>
-</div>
-
-<div class="col-md-3 mb-4">
-<div class="card dashboard-summary-card h-100">
-    <div class="card-body">
-        <p class="dashboard-summary-label mb-1">Restricted</p>
-        <h2 class="dashboard-summary-number mb-0">3</h2>
-    </div>
-</div>
-</div>
-
-</div>
-</section>
-
-<section class="container px-3 px-md-5 my-4">
-    <div class="card dashboard-card">
-        <div class="card-header">
-            Items Requiring Assessment
-        </div>
-    
-        <div class="card-body">
-            <p class="text-muted">
-                The following items require review.
-            </p>
-
-            <div class="table-responsive">
-                <table class="table align-middle dashboard-table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Item ID</th>
-                            <th scope="col">Title</th>
-                            <th scope="col">Category</th>
-                            <th scope="col">Cultural Group</th>
-                            <th scope="col">Status</th>
-                            <th scope="col" class="text-end">Manage</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        <tr>
-                            <td>ITEM1</td>
-                            <td>TITLE</td>
-                            <td>CATEGORY</td>
-                            <td>COMMUNITYGROUP</td>
-                            <td>
-                                <span class="badge text-bg-warning">Pending Review</span>
-                            </td>
-                            <td class="text-end">
-                                <a href="{{ url_for('library.assessment')}}" class="btn btn-primary btn-sm">
-                                    Review Item
-                                </a>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>ITEM2</td>
-                            <td>TITLE</td>
-                            <td>CATEGORY</td>
-                            <td>COMMUNITYGROUP</td>
-                            <td>
-                                <span class="badge text-bg-warning">Pending Review</span>
-                            </td>
-                            <td class="text-end">
-                                <a href="{{ url_for('library.assessment')}}" class="btn btn-primary btn-sm">
-                                    Review Item
-                                </a>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>ITEM3</td>
-                            <td>TITLE</td>
-                            <td>CATEGORY</td>
-                            <td>COMMUNITYGROUP</td>
-                            <td>
-                                <span class="badge text-bg-warning">Pending Review</span>
-                            </td>
-                            <td class="text-end">
-                                <a href="{{ url_for('library.assessment')}}" class="btn btn-primary btn-sm">
-                                    Review Item
-                                </a>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>ITEM4</td>
-                            <td>TITLE</td>
-                            <td>CATEGORY</td>
-                            <td>COMMUNITYGROUP</td>
-                            <td>
-                                <span class="badge text-bg-warning">Pending Review</span>
-                            </td>
-                            <td class="text-end">
-                                <a href="{{ url_for('library.assessment')}}" class="btn btn-primary btn-sm">
-                                    Review Item
-                                </a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Manage Access Requests-->
- 
-<section class="container px-3 px-md-5 my-4">
-    <div class="card admin-card">
-        <div class="card-header">
-            Manage Access Requests
-        </div>
-
-    <div class="card-body">
-        <p class="text-muted">
-            View and manage user access requests
-        </p>
-
-        <div class="table-responsive">
-            <table class="table align-middle dashboard-table admin-access-table">
-                <thead>
-                    <tr>
-                        <th scope="col">Request ID</th>
-                        <th scope="col">Item</th>
-                        <th scope="col">Requested By</th>
-                        <th scope="col">Reason</th>
-                        <th scope="col">Status</th>
-                        <th scope="col" class="text-center">Manage</th>
-                    </tr>
-                </thead>
-
-            </tbody>
-                <tr>
-                    <td>Request12</td>
-                    <td>Title</td>
-                    <td>Name</td>
-                    <td>Reason</td>
-                    <td>
-                        <span class="badge text-bg-warning">Pending</span>
-                    </td>
-                    <td class="text-center">
-                        <div class="d-flex justify-content-center gap-2">
-                            <a href="#!" class="btn btn-primary btn-sm">
-                                View
-                            </a>
-                            <a href="#!" class="btn btn-success btn-sm">
-                                Approve
-                            </a>
-                            <a href="#!" class="btn btn-danger btn-sm">
-                                Decline
-                            </a>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-            </table>
-        </div>
-    </div>
-    </div>
-</section>
-
 {% endblock %}
