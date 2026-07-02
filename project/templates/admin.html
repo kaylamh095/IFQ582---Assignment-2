@@ -313,7 +313,6 @@
                 </td>
 
                 <td class="text-end">
-                    <a href="/admin/edit-user/{{ user.ID }}" class="btn btn-sm btn-outline-primary">Edit</a>
                     <form method="POST" action="{{ url_for('admin.update_user_role', user_id=user.ID) }}" style="display:inline;"> 
                         <input type="hidden" name="action" value="delete">
                         <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
