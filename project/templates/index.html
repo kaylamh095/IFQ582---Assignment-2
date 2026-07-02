@@ -136,8 +136,13 @@
   {% for item in featured_items %}
   <div class="col-lg-3 col-md-6 mb-4">
     <article class="card collection-card h-100">
+<<<<<<< HEAD
       <img class="card-img-top"
            src="{{ url_for('static', filename=item.image_link) if item.image_link else url_for('static', filename='img/ItemPhotograph.jpg') }}"
+=======
+      <img class="card-img-top featured-item-image"
+           src="{{ url_for('static', filename=item.image_link) }}"
+>>>>>>> 3b36c052e0765800da28d34e8f2703fd3a501d5e
            alt="{{ item.title }}">
       <div class="card-body">
         <h4 class="card-title">{{ item.title }}</h4>
