@@ -1,5 +1,5 @@
 /* CSS Variables
-Used to define site wide colour palette. Simplifies and allows colours to be used consistently.
+Used to define colour palette sitewide. Simplifies and allows colours to be used consistently.
 */
 :root {
 --colour-espresso: #2B1A14;
@@ -91,7 +91,7 @@ img {
     }
 }
 
-/* Footer */
+/* Footer: Bootstrap Columns */
 .footer-custom {
     background-color: var(--colour-espresso);
     font-size: 0.95rem;
@@ -342,7 +342,8 @@ img {
 /* Badges for status*/
 .badge-approved,
 .badge-public,
-.badge-success {
+.badge-success, 
+.badge-completed {
     background-color: var(--colour-success-soft);
     color: var(--colour-success);
 }
@@ -361,6 +362,12 @@ img {
     background-color: var(--colour-danger-soft);
     color: var(--colour-danger);
 }
+
+.badge-private {
+    background-color: var(--colour-parchment);
+    color: var(--colour-espresso);
+}
+
 
 .role-badge{
     display: inline-block;

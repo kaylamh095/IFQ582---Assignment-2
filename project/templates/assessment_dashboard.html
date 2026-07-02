@@ -30,8 +30,24 @@
             <td>{{ item.title }}</td>
             <td>{{ item.item_category }}</td>
             <td>{{ item.cultural_group }}</td>
-            <td><span class="badge bg-secondary">{{ item.review_status }}</span></td>
-            <td><span class="badge bg-info text-dark">{{ item.access_level }}</span></td>
+            <td>
+              {% if item.review_status == 'Completed' %}
+              <span class="badge badge-completed">{{ item.review_status }}</span></td>
+              {% elif item.review_status == 'Under Review' %}
+              <span class="badge badge-under-review">{{ item.review_status }}</span></td>
+              {% else %}
+              <span class="badge badge-pending">{{ item.review_status }}</span></td>
+            {% endif %}
+            </td>
+            <td>
+              {% if item.access_level == 'Public' %}
+            <span class="badge badge-public">{{ item.access_level }}</span></td>
+            {% elif item.access_level == 'Restricted' %}
+            <span class="badge badge-restricted">{{ item.access_level }}</span></td>
+            {% else %}
+            <span class="badge badge-private">{{ item.access_level }}</span></td>
+            {% endif %}
+            </td>
             <td>
               <a href= 
 {{ url_for('library.assessment', item_id=item.item_ID)}} class="btn btn-sm btn-outline-dark">
