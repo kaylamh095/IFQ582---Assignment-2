@@ -173,6 +173,9 @@
             </div>
             <!-- Submit Button -->
                 <div class="d-flex justify-content-end gap-2 mt-4">
+                <a href="{{ url_for ('admin.admin_dashboard') }}" class="btn btn-outline-primary">
+                    Cancel
+                </a>
                 {{ form.submit(class="btn btn-primary") }}
                 </div>
                 </fieldset>
