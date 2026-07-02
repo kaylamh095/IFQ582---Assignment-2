@@ -1,3 +1,5 @@
+from project.db.connection import connection
+
 
 class CollectionItem:
     # Constructor
@@ -93,6 +95,4 @@ class CollectionItem:
 
         for request in self.access_requests:
             print(request)
-
-
 

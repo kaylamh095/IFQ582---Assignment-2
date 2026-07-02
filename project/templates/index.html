@@ -124,14 +124,34 @@
 </div>
 </div>
 </section>
-    
-    <!--Featured items from the collection-->
+ 
+<!--Featured items from the collection -->
     <section class="featured-items-section py-5" id="featured-items">
     <div class="container">
     <h2 class="text-center mb-4">Featured Collection Items</h2>
     <p class="text-center text-muted mb-4">
       Explore a curated collection of items from the Library.
     </p>
+<div class="row">
+  {% for item in featured_items %}
+  <div class="col-lg-3 col-md-6 mb-4">
+    <article class="card collection-card h-100">
+      <img class="card-img-top"
+           src="{{ url_for('static', filename=item.image_link) }}"
+           alt="{{ item.title }}">
+      <div class="card-body">
+        <h4 class="card-title">{{ item.title }}</h4>
+        <p class="card-text">{{ item.description }}</p>
+        <p class="small mb-1"><strong>Category:</strong> {{ item.item_category }}</p>
+        <a href="{{ url_for('library.item') }}" class="btn btn-primary">View Item</a>
+      </div>
+    </article>
+  </div>
+  {% endfor %}
+</div>
+
+    <!--Featured items from the collection
+ 
 
     <div class="row">
 
@@ -201,7 +221,7 @@
   </div>
 </div>
 </div>
- </section>
+ </section> -->
  
 <!--Contact-->
 <section class="container my-5" id="contact">
