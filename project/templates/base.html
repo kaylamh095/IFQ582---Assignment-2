@@ -77,8 +77,6 @@
       href="{{ url_for('main.index') }}#featured-items">
       Collection
       </a>
-      <a class="nav-item nav-link {% if request.endpoint == 'library.item'%} active{% endif %}"
-      href="{{ url_for('library.item') }}">Collection Item</a>
         {% if session.get("logged_in") %}
         {% if session["user"]["is_staff"] or session["user"]["is_elder"] %}
       <a class="nav-item nav-link {% if request.endpoint == 'library.assessment' %}active{% endif %}"
