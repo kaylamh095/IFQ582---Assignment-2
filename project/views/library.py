@@ -27,13 +27,8 @@ def item():
     return render_template('item.html')
 
 
-<<<<<<< HEAD
 
 @bp.route('/assessment_dashboard', methods=['GET'])
-=======
-@bp.route('/assessment/', methods = ['GET', 'POST']) 
-@only_admins
->>>>>>> feature/admin_functions
 @only_elders
 def assessment_dashboard():
     items = get_all_items()
