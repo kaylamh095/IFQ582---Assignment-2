@@ -75,3 +75,20 @@ def get_account_info(user_id):
             ID=str(row['id']),
         ) 
     return None
+
+
+#===============Featured Collection Items ================
+
+def get_featured_items():
+    cur = mysql.connection.cursor()
+    cur.execute(
+            "SELECT item_ID, title, description, image_link, item_category "
+            "FROM collection_items "
+            "WHERE access_level = 'Public' AND review_status = 'Completed' "
+            "ORDER BY RAND() LIMIT 4"
+        )
+    featured_items = cur.fetchall()
+    cur.close()    
+    return featured_items
+    
+    
