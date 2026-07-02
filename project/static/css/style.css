@@ -365,6 +365,31 @@ img {
     color: var(--colour-danger);
 }
 
+.role-badge{
+    display: inline-block;
+    min-width: 95px;
+    padding: 0.45rem 0.75rem;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-align: center;
+}
+
+.role-admin {
+    background-color: var(--colour-danger-soft);
+    color: var(--colour-danger)
+}
+
+.role-librarian {
+    background-color: var(--colour-success-soft);
+    color: var(--colour-success)
+}
+.role-not-assigned {
+    background-color: var(--colour-parchment);
+    color: var(--colour-espresso);
+}
+
+
 /* Shared Card style */
 .card .table th, 
 .card .table td {

@@ -180,11 +180,11 @@
                 <td>{{ user.email }}</td>
                 <td>
                     {% if user.is_admin == 1 %}
-                        <span class="badge bg-danger">Admin</span>
+                        <span class="role-badge role-admin">Admin</span>
                     {% elif user.is_admin == 0 %}
-                        <span class="badge bg-info">Librarian</span>
+                        <span class="role-badge role-librarian">Librarian</span>
                     {% else %}
-                        <span class="badge bg-secondary">No role assigned</span>
+                        <span class="role-badge role-not-assigned">No role assigned</span>
                     {% endif %}
                 </td>
 
