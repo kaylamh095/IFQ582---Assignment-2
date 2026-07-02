@@ -1,6 +1,6 @@
 ### import flask and template for error handling
 from flask import Flask,  render_template, Blueprint, request
-from ..db.connection import cursor, connection
+from ..project.db.connection import cursor, connection
 
 bp = Blueprint('scratch', __name__)
 
