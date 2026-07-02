@@ -1,5 +1,6 @@
 ### import flask and blueprint / route template
-from flask import Blueprint, render_template, flash, request, url_for, redirect, app
+from flask import Blueprint, render_template, flash, request, url_for, redirect, session, app
+from project.db import user
 from project.db.admin_db import get_access_requests, get_collection_items, get_user_role
 from project.forms import UpdateAccountForm, UpdateItemForm, UpdateRoleForm
 from wtforms import form
@@ -91,24 +92,26 @@ def manage_access_requests():
 # ================Account Page ================
 
 @bp.route('/account/', methods=['GET', 'POST'])
+#@login_required
 def update_account():
     form = UpdateAccountForm()
+    user = session.get('user')
     if form.validate_on_submit():
         cur = mysql.connection.cursor()
-        cur.execute("UPDATE user SET phone = %s, email = %s, password = %s WHERE id = %s", (form.phone.data, form.email.data, form.password.data, current_user.ID))
+        cur.execute("UPDATE user SET phone = %s, email = %s, password = %s WHERE id = %s", (form.phone.data, form.email.data, form.password.data, user.ID))
         mysql.connection.commit()
         cur.close()
         flash('Account updated successfully!', 'success')
         return redirect(url_for('admin.update_account'))
     #elif action == 'delete':
         cur = mysql.connection.cursor()
-        cur.execute("DELETE FROM user WHERE id = %s", (current_user.ID,))
+        cur.execute("DELETE FROM user WHERE id = %s", (user.ID,))
         mysql.connection.commit()
         cur.close()
         flash('Account deleted successfully!', 'success')
 
-    elif request.method == 'GET':
+    #elif request.method == 'GET':
         form.phone.data = current_user.phone
         form.email.data = current_user.email
-    return render_template('account.html', title='Update Account', form=form)
+    return render_template('account.html', title='Update Account', form=form, user=user)
     return redirect(url_for('admin.admin_dashboard'))
