@@ -82,13 +82,9 @@
         {% if session.get("logged_in") %}
         {% if session["user"]["is_staff"] or session["user"]["is_elder"] %}
       <a class="nav-item nav-link {% if request.endpoint == 'library.assessment' %}active{% endif %}"
-<<<<<<< HEAD
       href="{{ url_for('library.assessment_dashboard') }}">Reviewer Assessment</a>
-=======
-      href="{{ url_for('library.assessment') }}">Reviewer Assessment</a>
       {% endif %}
       {% endif %}
->>>>>>> feature/admin_functions
     <a class="nav-item nav-link"
       href="{{ url_for('main.index') }}#contact">
       Contact
