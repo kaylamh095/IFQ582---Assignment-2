@@ -20,6 +20,7 @@ def login_required(func):
         if 'user' not in session:
             flash('Please log in before moving on.', 'error')
             return redirect(url_for('login.login'))
+        return func(*args, **kwargs)
     return wrapper
 
 

@@ -38,7 +38,7 @@ def check_for_user(email, password):
          if row['elder_ID']:
             is_elder = True
          return ( User(row['first_name'], row['last_name'], 
-                  row['email'], row['phone'], password),
+                  row['email'], row['phone'], password, ID=row['ID']),
                   is_staff, is_admin, is_elder)
     return None
 

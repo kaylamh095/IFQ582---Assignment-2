@@ -8,13 +8,14 @@ from project.db.admin_db import get_collection_items, get_user_role
 from project.forms import UpdateItemForm, UpdateRoleForm
 from project.models.user import User
 from ..db.setup import mysql
-from ..wrappers import only_admins
+from ..wrappers import login_required, only_admins, only_staff
 
 bp = Blueprint('admin', __name__)
 
 #Route for the admin page
 @bp.route('/admin', methods=['GET', 'POST'])
-#@only_admins
+@login_required
+@only_staff
 def admin_dashboard():
     form = UpdateItemForm()
     db_items = get_collection_items()
@@ -22,6 +23,8 @@ def admin_dashboard():
     return render_template('admin.html', title='Admin', form=form, users=get_user_role(), items=get_collection_items(), requests=get_access_requests())
 
 @bp.route('/admin/add_item', methods=['GET', 'POST'])
+@login_required
+@only_staff
 def add_item():
     form = UpdateItemForm()
     if form.validate_on_submit():
@@ -35,6 +38,8 @@ def add_item():
 
 
 @bp.route('/admin/update_role/<int:user_id>', methods=['GET', 'POST'])
+@login_required
+@only_admins
 def update_user_role(user_id):
     new_role = request.form.get('new_role')
     action = request.form.get('action')
@@ -56,6 +61,8 @@ def update_user_role(user_id):
 
 
 @bp.route('/admin/manage_item/<int:item_id>', methods=['POST'])
+@login_required
+@only_admins
 def manage_item(item_id):
     action = request.form.get('action')
     if action == 'delete':
@@ -73,6 +80,8 @@ def manage_item(item_id):
 
 
 @bp.route('/admin/manage_access_requests', methods=['GET', 'POST'])
+@login_required
+@only_admins
 def manage_access_requests():
     if request.method == 'POST':
         request_id = request.form.get('request_id')
@@ -85,33 +94,24 @@ def manage_access_requests():
             flash('Access request status updated successfully!', 'success')
         else:
             flash('Invalid request ID or status.', 'error')
-    return render_template('admin.html', requests=get_access_requests(), title='Manage Access Requests')
+    return render_template('admin_manage_access_requests.html', requests=get_access_requests(), title='Manage Access Requests')
 
 
 
 # ================Account Page ================
 
 @bp.route('/account/', methods=['GET', 'POST'])
-#@login_required
+@login_required
 def update_account():
     form = UpdateAccountForm()
     user = session.get('user')
     if form.validate_on_submit():
         cur = mysql.connection.cursor()
-        cur.execute("UPDATE user SET phone = %s, email = %s, password = %s WHERE id = %s", (form.phone.data, form.email.data, form.password.data, user.ID))
+        cur.execute("UPDATE user SET phone = %s, email = %s, password = %s WHERE id = %s", (form.phone.data, form.email.data, form.password.data, user['id']))
         mysql.connection.commit()
         cur.close()
         flash('Account updated successfully!', 'success')
         return redirect(url_for('admin.update_account'))
-    #elif action == 'delete':
-        cur = mysql.connection.cursor()
-        cur.execute("DELETE FROM user WHERE id = %s", (user.ID,))
-        mysql.connection.commit()
-        cur.close()
-        flash('Account deleted successfully!', 'success')
-
-    #elif request.method == 'GET':
-        form.phone.data = current_user.phone
-        form.email.data = current_user.email
+        
     return render_template('account.html', title='Update Account', form=form, user=user)
-    return redirect(url_for('admin.admin_dashboard'))
+

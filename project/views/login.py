@@ -24,6 +24,7 @@ def login():
 
             user, is_staff, is_admin, is_elder = result
             session["user"] = {
+                "id": user.ID,
                 "firstname": user.first_name,
                 "surname": user.last_name,
                 "email": user.email,
