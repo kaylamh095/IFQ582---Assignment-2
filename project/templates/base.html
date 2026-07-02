@@ -82,7 +82,7 @@
         {% if session.get("logged_in") %}
         {% if session["user"]["is_staff"] or session["user"]["is_elder"] %}
       <a class="nav-item nav-link {% if request.endpoint == 'library.assessment' %}active{% endif %}"
-      href="{{ url_for('library.assessment') }}">Reviewer Assessment</a>
+      href="{{ url_for('library.assessment_dashboard') }}">Reviewer Assessment</a>
       {% endif %}
       {% endif %}
     <a class="nav-item nav-link"
