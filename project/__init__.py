@@ -1,7 +1,7 @@
 ### import flask and template for error handling
 from flask import Flask, app,  render_template
 from flask_login import LoginManager
-from .drafts import kath, scratch
+
 from project.models.user import User
 from .views import items, register
 from .db.setup import set_up_database
