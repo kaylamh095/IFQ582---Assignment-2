@@ -403,6 +403,34 @@ img {
     box-shadow: 0 0 0 0.2rem #75322233;
 }
 
+/* Flash message overlay */
+.flash-message-overlay {
+position: fixed;
+top: 8.5rem;
+right: 1.5rem;
+z-index: 1055;
+width: min(420px, calc(100% - 2rem));
+}
+
+.flash-message {
+border: none;
+border-radius: 10px;
+box-shadow: 0 4px 16px #2B1A1426;
+margin-bottom: 0.75rem;
+}
+
+.flash-message.alert-success {
+background-color: var(--colour-success-soft);
+color: var(--colour-espresso);
+border-left: 5px solid var(--colour-success);
+}
+
+.flash-message.alert-danger {
+background-color: var(--colour-danger-soft);
+color: var(--colour-espresso);
+border-left: 5px solid var(--colour-danger);
+}
+
 /* Tables */
 .table th,
 .table td {
