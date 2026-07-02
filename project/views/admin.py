@@ -2,7 +2,7 @@
 from flask import Blueprint, render_template, flash, request, url_for, redirect, session, app
 from project.db import user
 from project.db.admin_db import get_access_requests, get_collection_items, get_user_role, get_item_by_id
-from project.forms import RegisterLibraryStaffForm, RegisterPublicForm, UpdateAccountForm, UpdateItemForm, UpdateRoleForm
+from project.forms import RegisterCommunityElderForm, RegisterLibraryStaffForm, RegisterPublicForm, UpdateAccountForm, UpdateItemForm, UpdateRoleForm
 from wtforms import form
 from project.db.admin_db import get_collection_items, get_user_role
 from project.db.user import add_public_user, add_library_staff, add_community_elder, email_exists
@@ -142,7 +142,24 @@ def add_new_library_staff():
             else:
                 flash('A user with that email already exists.', 'error')
                 return redirect(url_for('admin.add_new_library_staff'))
-        flash('Library staff user added successfully!', 'success')
+    else:
+        flash('Please fill in all required fields.', 'error')
+    return redirect(url_for('admin.admin_dashboard'))
+
+@bp.route('/admin/add_new_community_elder', methods=['POST'])
+@login_required
+@only_admins
+def add_new_community_elder():
+    form = RegisterCommunityElderForm()
+    if form.validate_on_submit():
+        assert form.password.data, "Password is required"
+        form.password.data = sha256(form.password.data.encode()).hexdigest()
+        if not email_exists(form.email.data):
+            if add_community_elder(form):
+                flash('Community elder user added successfully!', 'success')
+            else:
+                flash('A user with that email already exists.', 'error')
+                return redirect(url_for('admin.add_new_community_elder'))
     else:
         flash('Please fill in all required fields.', 'error')
     return redirect(url_for('admin.admin_dashboard'))
