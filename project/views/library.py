@@ -13,7 +13,7 @@ from project.models.assessment_model import (
     get_elders,
     save_review,
     OUTCOME_LABELS,
-)
+    )
 
 bp = Blueprint('library', __name__)
 
