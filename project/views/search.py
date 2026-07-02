@@ -2,6 +2,7 @@
 ### import flask and template for error handling
 from flask import Flask,  render_template, Blueprint, request
 from ..db.connection import cursor
+from ..db.search_db import search_db
 from ..models.collitem import CollItem
 
 bp = Blueprint('search', __name__)
@@ -10,6 +11,7 @@ bp = Blueprint('search', __name__)
 ### search page form
 ### send results to search page under the search form area - needs GET & POST methods to do this
 @bp.route('/search', methods=['GET', 'POST'])
+#@bp.route('/', methods=['GET', 'POST'])
 def search():
     #pass
     title = "Search"
@@ -37,22 +39,25 @@ def search():
 
 
         try:
-            cur = cursor()
-            #cur = cursor(dictionary=True)
-            #cur = cursorDict() ### 
+            results = search_db(search_term, filter_by_category, filter_by_access)  ### call the search_db function to perform the search and get results
 
-            if filter_by_category == "" and filter_by_access == "":
-                ### search without filters
-                cur.execute("SELECT * FROM collection_items WHERE (title LIKE %s OR description LIKE %s) ORDER BY title", (search_term, search_term))
-            elif filter_by_category != "" and filter_by_access == "":
-                ### search with category filter only
-                cur.execute("SELECT * FROM collection_items WHERE (title LIKE %s OR description LIKE %s) AND item_category = %s", (search_term, search_term, filter_by_category))
-            elif filter_by_category == "" and filter_by_access != "":
-                ### search with access filter only
-                cur.execute("SELECT * FROM collection_items WHERE (title LIKE %s OR description LIKE %s) AND access_level = %s", (search_term, search_term, filter_by_access))
-            else:
-                ### search with both filters
-                cur.execute("SELECT * FROM collection_items WHERE (title LIKE %s OR description LIKE %s) AND item_category = %s AND access_level = %s", (search_term, search_term, filter_by_category, filter_by_access))
+
+#            cur = cursor()
+#            #cur = cursor(dictionary=True)
+#            #cur = cursorDict() ### 
+#
+#            if filter_by_category == "" and filter_by_access == "":
+#                ### search without filters
+#                cur.execute("SELECT * FROM collection_items WHERE (title LIKE %s OR description LIKE %s) ORDER BY title", (search_term, search_term))
+#            elif filter_by_category != "" and filter_by_access == "":
+#                ### search with category filter only
+#                cur.execute("SELECT * FROM collection_items WHERE (title LIKE %s OR description LIKE %s) AND item_category = %s", (search_term, search_term, filter_by_category))
+#            elif filter_by_category == "" and filter_by_access != "":
+#                ### search with access filter only
+#                cur.execute("SELECT * FROM collection_items WHERE (title LIKE %s OR description LIKE %s) AND access_level = %s", (search_term, search_term, filter_by_access))
+#            else:
+#                ### search with both filters
+#                cur.execute("SELECT * FROM collection_items WHERE (title LIKE %s OR description LIKE %s) AND item_category = %s AND access_level = %s", (search_term, search_term, filter_by_category, filter_by_access))
             
 
             
@@ -62,11 +67,14 @@ def search():
             #print(f"SELECT title, description FROM collection_items WHERE title LIKE %s OR description LIKE %s", (search_term, search_term))  # Debugging line to print the executed SQL query
 
             #cur.execute(sql_query)  ### execute the query
-            results = cur.fetchall()
-            print(f"SQL query results: {results}")  # Debugging line to print the executed SQL query results
-            cur.close()
+ #           results = cur.fetchall()
+ #           print(f"SQL query results: {results}")  # Debugging line to print the executed SQL query results
+ #           cur.close()
             #connection().close() ### don't close the connection here - it's before results returned to the template, which needs the connection open to display results (closes elsewhere in the app)
             #itemsall = [CollItem(item_id=str(row['item_id']), title=row['title'], description=row['description'], image_link=row['image_link'], item_category=row['item_category'], cultural_group=row['cultural_group'], sensitivity_notes=row['sensitivity_notes'], review_status=row['review_status'], access_level=row['access_level']) for row in results]  ### create a list of CollItem objects with the results
+  
+  
+  
         except Exception as e:
             print(f"Error: {e}")
 
