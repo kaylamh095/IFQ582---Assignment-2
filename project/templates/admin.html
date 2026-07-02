@@ -147,17 +147,17 @@
         </p>
 
         <div class="d-flex flex-wrap gap-2 mb-4">
-            <a href="#!" class="btn btn-primary">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createPublicUserModal">
                 Create Public User
-            </a>
+            </button>
 
-            <a href="#!" class="btn btn-primary">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createLibraryStaffModal">
                 Create Library Staff
-            </a>
+            </button>
 
-            <a href="#!" class="btn btn-primary">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createCommunityElderModal">
                 Create Community Elder
-            </a>
+            </button>
         </div>
 
         <div class="table-responsive">
@@ -215,6 +215,100 @@
     </div>
 </div>
 </section>
+
+<!--Modal for creating public users-->
+<div class="modal fade" id="createPublicUserModal" tabindex="-1" aria-labelledby="createPublicUserModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content admin-modal">
+      <div class="modal-header">
+        <h2 class="modal-title h5" id="createPublicUserModalLabel">Create Public User</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="POST" action="{{ url_for('admin.add_new_public_user') }}">
+          {{ form.hidden_tag() }}
+          <div class="mb-3">
+                <label for="createPublicFirstname" class="form-label">First Name</label>
+                <input type="text" class="form-control" id="createPublicFirstname" name="firstname">
+                </div>
+                <div class="mb-3">
+                <label for="createPublicLastname" class="form-label">Last Name</label>
+                <input type="text" class="form-control" id="createPublicLastname" name="lastname">
+                </div>
+                <div class="mb-3">
+                <label for="createPublicEmail" class="form-label">Email</label>
+                <input type="email" class="form-control" id="createPublicEmail" name="email">
+                </div>
+                <div class="mb-3">
+                <label for="createPublicPhone" class="form-label">Phone</label>
+                <input type="text" class="form-control" id="createPublicPhone" name="phone">
+                </div>
+                <div class="mb-3">
+                <label for="createPublicPassword" class="form-label">Password</label>
+                <input type="password" class="form-control" id="createPublicPassword" name="password">
+                </div>
+          <div class="d-flex justify-content-end gap-2 mt-4">
+            <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary">Create</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Modal for creating library staff users-->
+<div class="modal fade" id="createLibraryStaffModal" tabindex="-1" aria-labelledby="createLibraryStaffModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content admin-modal">
+      <div class="modal-header">
+        <h2 class="modal-title h5" id="createLibraryStaffModalLabel">Create Library Staff User</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="POST" action="{{ url_for('admin.add_new_library_staff') }}">
+          {{ form.hidden_tag() }}
+          <div class="mb-3">
+                <label for="createLibraryStaffFirstname" class="form-label">First Name</label>
+                <input type="text" class="form-control" id="createLibraryStaffFirstname" name="firstname">
+                </div>
+                <div class="mb-3">
+                <label for="createLibraryStaffLastname" class="form-label">Last Name</label>
+                <input type="text" class="form-control" id="createLibraryStaffLastname" name="lastname">
+                </div>
+                <div class="mb-3">
+                <label for="createLibraryStaffEmail" class="form-label">Email</label>
+                <input type="email" class="form-control" id="createLibraryStaffEmail" name="email">
+                </div>
+                <div class="mb-3">
+                <label for="createLibraryStaffPhone" class="form-label">Phone</label>
+                <input type="text" class="form-control" id="createLibraryStaffPhone" name="phone">
+                </div>
+                <div class="mb-3">
+                <label for="createLibraryStaffPassword" class="form-label">Password</label>
+                <input type="password" class="form-control" id="createLibraryStaffPassword" name="password">
+                </div>
+                <div class="mb-3">
+                <label for="createLibraryStaffPosition" class="form-label">Position Title</label>
+                <input type="text" class="form-control" id="createLibraryStaffPosition" name="position_title">
+                </div>
+                <div class="mb-3">
+                <label for="createLibraryStaffStartDate" class="form-label">Start Date</label>
+                <input type="date" class="form-control" id="createLibraryStaffStartDate" name="start_date">
+                </div>
+                <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="createLibraryStaffIsAdmin" name="is_admin">
+                <label class="form-check-label" for="createLibraryStaffIsAdmin">Is Admin</label>
+                </div>
+            <div class="d-flex justify-content-end gap-2 mt-4">
+            <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary">Create</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 {% endblock %}
