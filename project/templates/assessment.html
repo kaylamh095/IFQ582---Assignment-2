@@ -6,8 +6,9 @@
 {% block content %}
 <section class="container px-3 px-md-5 my-5">
   <div class="text-end mb-4">
-    <a href="#!" class="btn btn-outline-dark btn-sm">
+    <a href="{{ url_for('library.assessment_dashboard') }}" class="btn btn-outline-dark btn-sm">
       Return to Assessment Dashboard
+      
     </a>
   </div>
 
@@ -35,8 +36,8 @@
       <div class="card-body">
         <div class="row">
           <div class="col-md-4 mb-4 mb-md-0">
-            <img src="{{url_for('static', filename='img/ItemPhotograph.jpg')}}" class="img-fluid assessment-image"
-              alt="Collection item image">
+            <img src="{{ url_for('static', filename=item.image_link) if item.image_link else url_for('static', filename='img/ItemPhotograph.jpg') }}"
+              class="img-fluid assessment-image" alt="Collection item image">
           </div>
 
           <div class="col-md-8">
@@ -45,27 +46,27 @@
                 <tbody>
                   <tr>
                     <th>Item ID</th>
-                    <td>item_ID</td>
+                    <td>{{ item.item_ID }}</td>
                   </tr>
 
                   <tr>
                     <th>Title</th>
-                    <td>item_title</td>
+                    <td>{{ item.title }}</td>
                   </tr>
 
                   <tr>
                     <th>Category</th>
-                    <td>item_category</td>
+                    <td>{{ item.item_category }}</td>
                   </tr>
 
                   <tr>
                     <th>Cultural Group</th>
-                    <td>cultural_group</td>
+                    <td>{{ item.cultural_group }}</td>
                   </tr>
 
                   <tr>
                     <th>Description</th>
-                    <td>item_description</td>
+                    <td>{{ item.description }}</td>
                   </tr>
                 </tbody>
               </table>
@@ -88,27 +89,33 @@
             <tbody>
               <tr>
                 <th>Review Status</th>
-                <td>review status</td>
+                <td>{{ item.review_status }}</td>
               </tr>
 
               <tr>
                 <th>Access Level</th>
-                <td>access level</td>
+                <td>{{ item.access_level }}</td>
               </tr>
 
               <tr>
                 <th>Sensitivity Notes</th>
-                <td>sensitivity notes</td>
+                <td>{{ item.sensitivity_notes or 'None' }}</td>
               </tr>
 
               <tr>
                 <th>Current Recommendation</th>
-                <td>current recommendation</td>
+                <td>
+                  {% if latest %}
+                    {{ outcome_labels.get(latest.access_outcome, latest.access_outcome) }}
+                  {% else %}
+                    No reviews recorded yet
+                  {% endif %}
+                </td>
               </tr>
 
               <tr>
                 <th>Conditions of Use</th>
-                <td>conditions of use</td>
+                <td>{{ latest.conditions_of_use if latest else 'None recorded yet' }}</td>
               </tr>
 
           </table>
@@ -121,25 +128,36 @@
     <div class="card assessment-card">
       <div class="card-header">
         Review Discussion History
+        <span class="badge bg-secondary float-end">{{ reviews|length }} review{{ 's' if reviews|length != 1 else '' }}</span>
       </div>
       <div class="card-body">
         <p class="text-muted">
-          This section will display review notes, discussions, access decisions connected to the database.
+          Review notes and access decisions recorded by community elders appear here, most recent first.
         </p>
-        <div class="review-history-item">
-          <strong>Library Staff</strong>
-          <p class="small text-muted mb-1">Date submitted</p>
-          <p>
-            Item submitted for community review. Metadata, access level and sensitivity require assessment.
-          </p>
-        </div>
-        <div class="review-history-item">
-          <strong>Community Reviewer</strong>
-          <p class="small text-muted mb-1">Pending</p>
-          <p>
-            Community review notes will appear here once recorded.
-          </p>
-        </div>
+
+        {% if reviews %}
+          {% for review in reviews %}
+            <div class="review-history-item comment-entry">
+              <div class="d-flex justify-content-between align-items-start flex-wrap">
+                <strong>{{ review.first_name }} {{ review.last_name }} &middot; {{ review.community_name }} Elder</strong>
+                <span class="badge outcome-badge outcome-{{ review.access_outcome }}">
+                  {{ outcome_labels.get(review.access_outcome, review.access_outcome) }}
+                </span>
+              </div>
+              <p class="small text-muted mb-2">{{ review.review_timestamp }} &middot; Sensitivity: {{ review.sensitivity_level }}</p>
+              <p class="comment-notes">{{ review.review_notes }}</p>
+              <p class="small mb-0"><strong>Conditions of use:</strong> {{ review.conditions_of_use }}</p>
+            </div>
+          {% endfor %}
+        {% else %}
+          <div class="review-history-item">
+            <strong>Community Reviewer</strong>
+            <p class="small text-muted mb-1">Pending</p>
+            <p>
+              Community review notes will appear here once recorded.
+            </p>
+          </div>
+        {% endif %}
       </div>
     </div>
 
@@ -152,7 +170,11 @@
       </div>
       <div class="card-body">
 
-        <form method="POST">
+        {% if error %}
+          <div class="alert alert-danger">{{ error }}</div>
+        {% endif %}
+
+        <form method="POST" action="{{ url_for('library.submit_review', item_id=item.item_ID) }}">
           <div class="mb-3">
             <label for="reviewNotes">Review Notes</label>
             <textarea class="form-control" id="reviewNotes" name="reviewNotes" rows="5"
@@ -187,13 +209,15 @@
           </div>
 
           <div class="mb-3">
-            <label for="community_name" class="form-label">Community Reviewer Name</label>
-            <input type="text" 
-                    class="form-control" 
-                    name="community_name" 
-                    id="community_name"
-                    value="Community Reviewer Name" 
-                    readonly>
+            <label for="elder_id" class="form-label">Community Reviewer</label>
+            <select class="form-select" name="elder_id" id="elder_id" required>
+              <option value="" selected disabled>Select the reviewing elder</option>
+              {% for elder in elders %}
+                <option value="{{ elder.elder_ID }}">
+                  {{ elder.first_name }} {{ elder.last_name }} &mdash; {{ elder.community_name }}
+                </option>
+              {% endfor %}
+            </select>
           </div>
 
           <button type="submit" class="btn btn-primary">
@@ -203,6 +227,9 @@
       </div>
     </div>
   </section>
+</section>
+
+{% endblock %}
 
 
-  {% endblock %}
+
