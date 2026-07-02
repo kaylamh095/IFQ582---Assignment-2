@@ -1,7 +1,5 @@
 ### search.py
 ### import flask and template for error handling
-from turtle import title
-
 from flask import Flask,  render_template, Blueprint, request
 from ..db.connection import cursor
 from ..models.collitem import CollItem
@@ -131,4 +129,3 @@ def search():
 ### Costa, Jose Ortis. (2019). Search Utility with Flask and MySQL. Medium. https://medium.com/@joseortizcosta/search-utility-with-flask-and-mysql-60bb8ee83dad.
 ### John Elder. (2021). Search Blog Posts From Navbar - Flask Fridays #31. YouTube. https://www.youtube.com/watch?v=kmtZTo-_gJY.
 ### Ochoa, Brandon. (2023). Building a Search Feature in a Python Flask App. Ochoa Projects. https://ochoaprojects.com/posts/FlaskAppWithSimpleSearch.
-
