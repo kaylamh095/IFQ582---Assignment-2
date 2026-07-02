@@ -1,0 +1,34 @@
+
+<!-- templates/searchresults.html -->
+{% extends 'base.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+
+
+
+<!--Search results-->
+<section class="container my-5" id="collection">
+  <div class="row justify-content-center">
+  <div class="col-lg-10">
+
+  <div class="card searchresults-card">
+    <div class="card-header">
+      {{ title }}
+    </div>
+    <div class="card-body">
+
+    <p>Search results for: <strong>{{ search_term }}</strong></p>
+    <p>Category filter: <strong>{{ filter_category }}</strong></p>
+    <p>Access level filter: <strong>{{ filter_access }}</strong></p>
+    
+
+</div>
+</div>
+</div>
+</div>
+</section>
+
+
+{% endblock %}

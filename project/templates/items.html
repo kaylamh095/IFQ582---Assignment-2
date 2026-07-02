@@ -21,7 +21,7 @@
   <div class="card-body">
     <div class="row">
       <div class="col-md-5 mb-4 mb-md-0">
-              <img src="{{url_for('static', filename=item.image_link) }}"
+              <img src="{{ url_for('static', filename=item.image_link) }}" 
       class="img-fluid item-detail-image"
       alt="Collection item image">
     </div>
@@ -63,12 +63,12 @@
 
     <tr>
       <th>Category</th>
-      <td>{{ item.item_category }}
+      <td>{{ item.item_category }}</td>
     </tr>
 
   <tr>
       <th>Cultural Group</th>
-      <td>{{ item.cultural_group }}</td>
+      <td>{{ item.cultural_group }}
     </tr>
 
      <tr>
@@ -99,6 +99,56 @@
 </div>
 </div>
 </section>
+
+  <section class="container px-3 px-md-5 my-5" id="request-access">
+<div class="card item-detail-card">
+  <div class="card-header">
+    Request Access to This Item
+  </div>
+<div class="card-body">
+  <p>
+Request access to this item by filling out this form.
+  </p>
+  
+    <form method="POST">
+      <div class="mb-3">
+            <label for="fullName" class="form-label">Full Name</label>
+    <input type="text" 
+          class="form-control" 
+          id="fullName" 
+          name="fullName" 
+          placeholder="Enter your full name"
+          required>
+  </div>
+
+  <div class="mb-3">
+    <label for="email" class="form-label">Email</label>
+    <input type="email" 
+    class="form-control" 
+    id="email"  
+    name="email"  
+    placeholder="name@example.com"
+    required>
+  </div>
+
+    <div class="mb-3">
+    <label for="Reason" class="form-label">Reason for Access Request</label>
+    <textarea class="form-control" 
+              id="reason" 
+              name="reason" 
+              rows="5" 
+              placeholder="Please describe why you would like access to this item. Eg. Personal interest, educational etc."
+              required
+              minlength="10"></textarea>
+      </div>
+      <button type="submit"
+      class="btn btn-primary">
+      Submit
+    </button>
+    </form>
+    </div>
+    </div>
+  </section>
 
   {% endfor %}
 {% endblock %}

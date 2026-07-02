@@ -37,7 +37,7 @@ Create a new MySQL database locally. Execute the schema saved in database.sql to
 
 
 #### 3. Configure Environment Variables
-Create a file named `.env` in the project root directory and configure it with your local MySQL credentials:
+Create a file named either `.env` or `env.txt` in the project root directory and configure it with your local MySQL credentials:
 
 ```env
 MYSQL_HOST=localhost

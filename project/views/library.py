@@ -4,7 +4,7 @@ from flask import Blueprint, render_template, request, flash, url_for, redirect
 # from flask_login import login_required
 from project.forms import UpdateItemForm
 from ..db.setup import mysql
-from ..wrappers import only_admins, only_elders
+from ..wrappers import only_elders
 from ..db.connection import connection
 
 

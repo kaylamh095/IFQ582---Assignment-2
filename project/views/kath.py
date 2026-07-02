@@ -2,7 +2,7 @@
 ### import flask and template for error handling
 from flask import Flask,  render_template, Blueprint, request
 from ..db.connection import cursor, connection
-from ..models.item import CollItem
+from ..models.collitem import CollItem
 
 bp = Blueprint('kath', __name__)
 

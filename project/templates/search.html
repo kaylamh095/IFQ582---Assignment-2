@@ -1,0 +1,71 @@
+
+<!-- templates/search.html -->
+{% extends 'base.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+
+
+
+<!--Search and filter-->
+<section class="container my-5" id="collection">
+  <div class="row justify-content-center">
+  <div class="col-lg-10">
+
+  <div class="card search-card">
+    <div class="card-header">
+      Search the Collection
+    </div>
+    <div class="card-body">
+
+<!--Connect Filter controls (collection_items)-->
+<form action="/searchresults" method="POST">
+  <div class="mb-3">
+        <label for="searchKeyword">Search:</label>
+        <input type="text"
+        class="form-control"
+        id="searchKeyword"
+        name="search_term"
+        placeholder="Search by title, category, cultural group, access level or keyword">
+      </div>
+
+  <div class="row">
+
+      <div class="col-md-5">
+        <label for="categoryFilter">Category:</label>
+        <select class="form-select" id="categoryFilter" name="filter_category">
+          <option value="">All Categories</option>
+          <option value="Photography">Photography</option>
+          <option value="Artwork">Artwork</option>
+          <option value="Documents and Stories">Documents and Stories</option>
+          <option value="Audio Collection">Audio Collection</option>
+          <option value="Cultural Artefacts">Cultural Artefacts</option>
+        </select>
+      </div>
+
+      <div class="col-md-5 mb-3">
+        <label for="accessFilter" class="form-label">Access Level</label>
+        <select class="form-select" id="accessFilter" name="filter_access">
+          <option value="">All Access Levels</option>
+          <option value="Public">Public</option>
+          <option value="Restricted">Restricted</option>
+          <option value="Private">Private</option>
+          </select>
+      </div>
+
+      <div class="col-md-2 mb-3 d-flex align-items-end">
+        <button type="submit" class="btn btn-primary w-100">
+          Submit
+        </button>
+      </div>
+</div>
+</form>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+
+{% endblock %}

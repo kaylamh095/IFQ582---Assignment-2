@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %} Access denied {% endblock%}
+{% block content %}
+
+<section class="container my-5">
+    <div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card error-card text-center">
+            <div class="card-body p-5">
+    <h1 class="mb-3"> Access denied</h1>
+    <p>
+        Sorry, but you are not allowed to directly access this page, please use Search page. 
+    </p>
+<a href="{{url_for('main.index')}}" class="btn btn-primary my-1">
+    Return Home
+</a>
+ </div>
+ </div>
+    </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -4,6 +4,7 @@ from flask import Blueprint, render_template, request, flash, redirect, url_for
 from hashlib import sha256
 from ..forms import RegisterPublicForm, RegisterLibraryStaffForm, RegisterCommunityElderForm
 from ..db.user import email_exists, add_public_user, add_library_staff, add_community_elder
+from ..wrappers import only_admins
 
 bp = Blueprint('register', __name__)
 
@@ -31,6 +32,7 @@ def registerPublicUser():
 
 
 @bp.route('/register_library_staff/', methods=['POST', 'GET'])
+@only_admins
 def registerLibraryStaff():
     form = RegisterLibraryStaffForm()
     if request.method == 'POST':
@@ -53,6 +55,7 @@ def registerLibraryStaff():
 
 
 @bp.route('/register_community_elder/', methods=['POST', 'GET'])
+@only_admins
 def registerCommunityElder():
     form = RegisterCommunityElderForm()
     if request.method == 'POST':
