@@ -33,6 +33,8 @@
 
   <div class="row">
 
+    <!--  categories don't match DB so commenting these out to fix -->
+    <!--  
       <div class="col-md-5">
         <label for="categoryFilter">Category:</label>
         <select class="form-select" id="categoryFilter" name="filter_category">
@@ -42,6 +44,21 @@
           <option value="Documents and Stories">Documents and Stories</option>
           <option value="Audio Collection">Audio Collection</option>
           <option value="Cultural Artefacts">Cultural Artefacts</option>
+        </select>
+      </div>
+      -->
+      
+
+      <div class="col-md-5">
+        <label for="categoryFilter">Category:</label>
+        <select class="form-select" id="categoryFilter" name="filter_category">
+          <option value="">All Categories</option>
+          <option value="Artwork created by Indigenous artists">Artwork created by Indigenous artists</option>
+          <option value="Audio recordings of oral histories">Audio recordings of oral histories</option>
+          <option value="Cultural artefact records">Cultural artefact records</option>
+          <option value="Historical Photographs">Historical Photographs</option>
+          <option value="Language preservation materials">Language preservation materials</option>
+          <option value="Archival manuscripts or documents">Archival manuscripts or documents</option>
         </select>
       </div>
 
@@ -97,11 +114,21 @@
 <!-- Results underneath -->
 {% if results %}
     {% for item in results %}
-        <p>{{ item.title }}</p>
-        <p>{{ item.description }}</p></br>
+        <p>{{ item.title }} || {{ item.access_level }} || {{ item.item_category }}</p>
+        {% if item.access_level == 'Public' %}
+            <p>{{ item.description }}</p></br>
+        {% endif %}
+
+      </br>
     {% endfor %}
-{% elif search_query %}
-    <p>No results found for "{{ search_query }}"</p>
+{% elif search_query and filter_category and filter_access %}
+    <p>No results found for search term: "{{ search_query }}" and filter: "{{ filter_category }}" and "{{ filter_access }}"</p>
+{% elif search_query and filter_category %}
+    <p>No results found for search term: "{{ search_query }}" and filter: "{{ filter_category }}"</p>
+{% elif search_query and filter_access %}
+    <p>No results found for search term: "{{ search_query }}" and filter: "{{ filter_access }}"</p>
+{% else %}
+    <p>No results found.</p>
 {% endif %}
 
 
