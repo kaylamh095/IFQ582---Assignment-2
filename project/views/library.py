@@ -4,7 +4,7 @@ from flask import Blueprint, render_template, request, flash, url_for, redirect
 # from flask_login import login_required
 from project.forms import UpdateItemForm
 from ..db.setup import mysql
-from ..wrappers import only_elders
+from ..wrappers import only_elders, only_admins
 from ..db.connection import connection
 from project.models.assessment_model import (
     get_all_items,
@@ -27,8 +27,13 @@ def item():
     return render_template('item.html')
 
 
+<<<<<<< HEAD
 
 @bp.route('/assessment_dashboard', methods=['GET'])
+=======
+@bp.route('/assessment/', methods = ['GET', 'POST']) 
+@only_admins
+>>>>>>> feature/admin_functions
 @only_elders
 def assessment_dashboard():
     items = get_all_items()

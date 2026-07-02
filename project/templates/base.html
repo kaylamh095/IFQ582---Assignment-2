@@ -36,13 +36,12 @@
       <!--<a class="btn btn-outline-light btn-sm" href="#!">
         Login / Account
       </a> -->
-
       {% if session.get("logged_in") %}
+        {% if session["user"]["is_staff"] %}
           <a class="btn btn-outline-light btn-sm" href="{{ url_for('admin.admin_dashboard')}}">Admin Page</a>
-          <!-- Below url will need updating once we have an Account address -->
+          {% endif %}
           <a class="btn btn-outline-light btn-sm" href="{{ url_for('admin.update_account')}}">Account</a>
           <a class="btn btn-outline-light btn-sm" href="{{ url_for('login.logout')}}">Logout</a>
-
       {% else %}
           <a class="btn btn-outline-light btn-sm" href="{{ url_for('login.login')}}">Login</a>
           <a class="btn btn-outline-light btn-sm" href="{{ url_for('register.registerPublicUser')}}">Register</a>
@@ -80,8 +79,16 @@
       </a>
       <a class="nav-item nav-link {% if request.endpoint == 'library.item'%} active{% endif %}"
       href="{{ url_for('library.item') }}">Collection Item</a>
+        {% if session.get("logged_in") %}
+        {% if session["user"]["is_staff"] or session["user"]["is_elder"] %}
       <a class="nav-item nav-link {% if request.endpoint == 'library.assessment' %}active{% endif %}"
+<<<<<<< HEAD
       href="{{ url_for('library.assessment_dashboard') }}">Reviewer Assessment</a>
+=======
+      href="{{ url_for('library.assessment') }}">Reviewer Assessment</a>
+      {% endif %}
+      {% endif %}
+>>>>>>> feature/admin_functions
     <a class="nav-item nav-link"
       href="{{ url_for('main.index') }}#contact">
       Contact
