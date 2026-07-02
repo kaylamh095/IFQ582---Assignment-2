@@ -1,7 +1,6 @@
 ### import flask and blueprint / route template
-from flask import Blueprint, render_template, flash, request, url_for, redirect, app
-from flask_login import current_user, login_required
-from flask_wtf import form
+from flask import Blueprint, render_template, flash, request, url_for, redirect, session, app
+from project.db import user
 from project.db.admin_db import get_access_requests, get_collection_items, get_user_role
 from project.forms import UpdateAccountForm, UpdateItemForm, UpdateRoleForm
 from wtforms import form
@@ -20,7 +19,7 @@ def admin_dashboard():
     form = UpdateItemForm()
     db_items = get_collection_items()
     db_users = get_user_role()
-    return render_template('admin.html', title='Admin', form=form, users=db_users, items=db_items)
+    return render_template('admin.html', title='Admin', form=form, users=get_user_role(), items=get_collection_items(), requests=get_access_requests())
 
 @bp.route('/admin/add_item', methods=['GET', 'POST'])
 def add_item():
@@ -32,19 +31,26 @@ def add_item():
         cur.close()
         flash('Item added successfully!', 'success')
         return redirect(url_for('admin.admin_dashboard'))
-    return render_template('add_item.html', form=form,)
+    return render_template('add_item.html', title='Add New Item', form=form)
 
 
-@bp.route('/admin/update_role/<int:user_id>', methods=['POST'])
+@bp.route('/admin/update_role/<int:user_id>', methods=['GET', 'POST'])
 def update_user_role(user_id):
     new_role = request.form.get('new_role')
-    
+    action = request.form.get('action')
+
     if new_role is not None:
         cur = mysql.connection.cursor()
         cur.execute("UPDATE library_staff SET is_admin = %s WHERE user_ID = %s", (new_role, user_id))
         mysql.connection.commit()
         cur.close()
         flash('User role updated successfully!', 'success')
+    elif action == 'delete':
+        cur = mysql.connection.cursor()
+        cur.execute("DELETE FROM library_staff WHERE user_ID = %s", (user_id,))
+        mysql.connection.commit()
+        cur.close()
+        flash('User deleted successfully!', 'success')
     
     return redirect(url_for('admin.admin_dashboard'))
 
@@ -61,7 +67,7 @@ def manage_item(item_id):
     elif action == 'update':
         # need to figure this out
         flash('Update functionality not implemented yet.', 'info')
-    return redirect(url_for('admin.manage_collection_page'))
+    return redirect(url_for('admin.admin_dashboard'))
 
 
 
@@ -86,18 +92,26 @@ def manage_access_requests():
 # ================Account Page ================
 
 @bp.route('/account/', methods=['GET', 'POST'])
-@login_required
+#@login_required
 def update_account():
     form = UpdateAccountForm()
+    user = session.get('user')
     if form.validate_on_submit():
         cur = mysql.connection.cursor()
-        cur.execute("UPDATE user SET phone = %s, email = %s, password = %s WHERE id = %s", (form.phone.data, form.email.data, form.password.data, current_user.ID))
+        cur.execute("UPDATE user SET phone = %s, email = %s, password = %s WHERE id = %s", (form.phone.data, form.email.data, form.password.data, user.ID))
         mysql.connection.commit()
         cur.close()
         flash('Account updated successfully!', 'success')
         return redirect(url_for('admin.update_account'))
-    elif request.method == 'GET':
+    #elif action == 'delete':
+        cur = mysql.connection.cursor()
+        cur.execute("DELETE FROM user WHERE id = %s", (user.ID,))
+        mysql.connection.commit()
+        cur.close()
+        flash('Account deleted successfully!', 'success')
+
+    #elif request.method == 'GET':
         form.phone.data = current_user.phone
         form.email.data = current_user.email
-        return render_template('admin.account.html', title='Update Account', form=form)
+    return render_template('account.html', title='Update Account', form=form, user=user)
     return redirect(url_for('admin.admin_dashboard'))

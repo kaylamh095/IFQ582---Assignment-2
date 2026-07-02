@@ -1,7 +1,7 @@
 from datetime import date
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
-from wtforms.fields import SubmitField, StringField, PasswordField, DateField, BooleanField, TextAreaField, FileField
+from wtforms.fields import SubmitField, StringField, PasswordField, DateField, BooleanField, TextAreaField
 from wtforms.validators import InputRequired, email, Length
 from .models.public_user import PublicUser
 from .models.library_staff import LibraryStaff
