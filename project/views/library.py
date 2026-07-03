@@ -4,7 +4,7 @@ from flask import Blueprint, render_template, request, flash, url_for, redirect
 # from flask_login import login_required
 from project.forms import UpdateItemForm
 from ..db.setup import mysql
-from ..wrappers import only_elders, only_admins
+from ..wrappers import admins_and_elders
 from ..db.connection import connection
 from project.models.assessment_model import (
     get_all_items,
@@ -29,7 +29,7 @@ def item():
 
 
 @bp.route('/assessment_dashboard', methods=['GET'])
-@only_elders
+@admins_and_elders
 def assessment_dashboard():
     items = get_all_items()
 
@@ -40,7 +40,7 @@ def assessment_dashboard():
 
 
 @bp.route('/assessment/<int:item_id>', methods=['GET'])
-@only_elders
+@admins_and_elders
 def assessment(item_id):
     item = get_item(item_id)
 
@@ -62,7 +62,7 @@ def assessment(item_id):
 
 
 @bp.route('/assessment/<int:item_id>/review', methods=['POST'])
-@only_elders
+@admins_and_elders
 def submit_review(item_id):
     item = get_item(item_id)
 

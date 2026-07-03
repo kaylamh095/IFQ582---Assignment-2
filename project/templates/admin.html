@@ -123,10 +123,11 @@
                                 <div class="d-flex justify-content-center gap-2">
                                             <a href="{{ url_for('library.assessment_dashboard', request_id=request.request_id) }}" class="btn btn-primary btn-sm">View</a>
                                             <button type="submit" name="new_status" value="approved" class="btn btn-success btn-sm">Approve</button>
-                                            <button type="submit" name="new_status" value="declined" class="btn btn-danger btn-sm">Decline</button>
-                                </select>
+                                            <button type="submit" name="new_status" value="declined" class="btn btn-danger btn-sm">Decline</button>      
+                                </div>
+                            </form>
                             </td>
-                        </tr>
+                            </tr> 
                         {% endfor %}
                     </tbody>
                 </table>
