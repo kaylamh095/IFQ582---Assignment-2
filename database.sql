@@ -33,7 +33,7 @@ CREATE TABLE `access_request` (
   PRIMARY KEY (`request_ID`),
   KEY `item_ID` (`item_ID`),
   KEY `member_ID` (`member_ID`),
-  CONSTRAINT `access_request_ibfk_1` FOREIGN KEY (`item_ID`) REFERENCES `collection_items` (`item_ID`),
+  CONSTRAINT `access_request_ibfk_1` FOREIGN KEY (`item_ID`) REFERENCES `collection_items` (`item_ID`) ON DELETE CASCADE,
   CONSTRAINT `access_request_ibfk_2` FOREIGN KEY (`member_ID`) REFERENCES `public_user` (`member_ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -67,7 +67,7 @@ CREATE TABLE `access_review` (
   PRIMARY KEY (`review_ID`),
   KEY `item_ID` (`item_ID`),
   KEY `elder_ID` (`elder_ID`),
-  CONSTRAINT `access_review_ibfk_1` FOREIGN KEY (`item_ID`) REFERENCES `collection_items` (`item_ID`),
+  CONSTRAINT `access_review_ibfk_1` FOREIGN KEY (`item_ID`) REFERENCES `collection_items` (`item_ID`) ON DELETE CASCADE,
   CONSTRAINT `access_review_ibfk_2` FOREIGN KEY (`elder_ID`) REFERENCES `community_elder` (`elder_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -232,4 +232,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-07-01 20:16:17
+-- Dump completed on 2026-07-03 12:04:03
